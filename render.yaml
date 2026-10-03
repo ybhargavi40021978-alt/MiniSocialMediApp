@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: minisocial
+    runtime: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn --pythonpath backend minisocial.wsgi:application --bind 0.0.0.0:$PORT"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: RENDER
+        value: "true"

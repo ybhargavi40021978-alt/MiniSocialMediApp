@@ -387,6 +387,30 @@ Open **`http://127.0.0.1:8000/`** in your browser.
 
 ---
 
+## ☁️ Deploy to Render (Render.com)
+
+The repository includes pre-configured **`render.yaml`**, **`build.sh`**, **`whitenoise`**, and **`gunicorn`** for automated zero-config deployment.
+
+### Option A: 1-Click Render Blueprint (Recommended)
+1. Go to your [Render Dashboard](https://dashboard.render.com/).
+2. Click **New +** ➔ **Blueprint**.
+3. Select your repository: `https://github.com/ybhargavi40021978-alt/MiniSocialMediApp`.
+4. Render automatically parses `render.yaml` and provisions your web service.
+5. Click **Apply**. Render will run `./build.sh` and launch the app live on `https://<your-service>.onrender.com`.
+
+### Option B: Manual Web Service on Render
+1. In the Render Dashboard, click **New +** ➔ **Web Service**.
+2. Connect your GitHub repository `MiniSocialMediApp`.
+3. Configure the settings:
+   - **Environment:** `Python 3`
+   - **Build Command:** `./build.sh`
+   - **Start Command:** `gunicorn --pythonpath backend minisocial.wsgi:application --bind 0.0.0.0:$PORT`
+4. Under **Advanced / Environment Variables**, add:
+   - `PYTHON_VERSION`: `3.11.9`
+   - `DEBUG`: `False`
+   - `SECRET_KEY`: *(Generate a secure random string)*
+5. Click **Create Web Service**.
+
 ## 🧪 Automated Verification & Tests
 
 The project includes two end-to-end automated test suites.

@@ -4,16 +4,27 @@ Django settings for minisocial project.
 
 from pathlib import Path
 
-# BASE_DIR resolves to project root (containing frontend/, backend/, database/)
+import os
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 if BASE_DIR.name == 'backend':
     BASE_DIR = BASE_DIR.parent
 
-SECRET_KEY = 'django-insecure-btagfe%$c*70&1r5(t#9*hsz=+_!^2#44&exc38#ymwnyv9(q0'
+SECRET_KEY = os.environ.get('SECRET_KEY', 'django-insecure-btagfe%$c*70&1r5(t#9*hsz=+_!^2#44&exc38#ymwnyv9(q0')
 
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'localhost', '127.0.0.1']
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'https://*.render.com',
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -27,6 +38,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -88,6 +100,7 @@ STATICFILES_DIRS = [
     BASE_DIR / 'frontend' / 'static',
 ]
 STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'

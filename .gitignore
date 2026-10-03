@@ -16,3 +16,6 @@ Thumbs.db
 # IDE files
 .vscode/
 .idea/
+
+# Collected staticfiles (generated at build time on Render)
+staticfiles/
