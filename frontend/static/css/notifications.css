@@ -1,0 +1,472 @@
+/* ==========================================================================
+   MINISOCIAL — 7. NOTIFICATION PAGE
+   Pixel-perfect reproduction of Screen 7 from Reference Image
+   ========================================================================== */
+
+/* --------------------------------------------------
+   1. COLOR PALETTE & DESIGN VARIABLES
+   -------------------------------------------------- */
+:root {
+  --primary-blue: #1976F3;
+  --dark-navy: #14213D;
+  --text-gray: #64748B;
+  --text-muted: #94A3B8;
+  --light-bg: #F7FAFD;
+  --white: #FFFFFF;
+  --border-light: #E2EAF2;
+  --border-sidebar: #E4ECF4;
+  --border-card: #E3ECF4;
+  --border-row: #F0F4F8;
+  --light-blue-active: #EEF5FF;
+  --notif-red: #EF4444;
+  --heart-pink: #FF4F70;
+  --heart-bg: #FFE8EC;
+
+  --sidebar-width: 160px;
+  --card-width: 540px;
+  --font-family: 'Inter', Arial, sans-serif;
+}
+
+/* --------------------------------------------------
+   2. RESET & BASE
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--light-bg);
+  color: var(--dark-navy);
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------
+   3. OVERALL DASHBOARD LAYOUT
+   -------------------------------------------------- */
+.notifications-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  background-color: var(--light-bg);
+}
+
+/* --------------------------------------------------
+   4. LEFT SIDEBAR
+   Width: ~160px, Height: 100vh, White Background
+   -------------------------------------------------- */
+.sidebar {
+  width: var(--sidebar-width);
+  height: 100vh;
+  background-color: var(--white);
+  border-right: 1px solid var(--border-sidebar);
+  display: flex;
+  flex-direction: column;
+  padding: 16px 12px;
+  flex-shrink: 0;
+  user-select: none;
+  z-index: 10;
+}
+
+/* Logo */
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0 6px 18px;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #F1F5F9;
+}
+
+.logo-icon-wrap {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand-icon-svg {
+  width: 19px;
+  height: 19px;
+}
+
+.logo-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.nav-item {
+  width: 100%;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7.5px 10px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--dark-navy);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  position: relative;
+}
+
+.nav-link:hover {
+  background-color: #F8FAFD;
+  color: var(--primary-blue);
+}
+
+.nav-icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+  flex-shrink: 0;
+}
+
+.nav-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+/* ACTIVE STATE FOR NOTIFICATIONS */
+.nav-link.active {
+  background-color: var(--light-blue-active);
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.nav-link.active .nav-icon {
+  color: var(--primary-blue);
+}
+
+/* Small Red Circular Notification Badge */
+.notif-badge {
+  background-color: var(--notif-red);
+  color: var(--white);
+  font-size: 8px;
+  font-weight: 700;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  margin-left: auto;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.notif-badge.hidden {
+  opacity: 0;
+  transform: scale(0.6);
+  pointer-events: none;
+}
+
+/* Logout Button */
+.sidebar-bottom {
+  padding-top: 12px;
+  border-top: 1px solid #F1F5F9;
+  margin-top: auto;
+}
+
+.logout-link {
+  color: #DC2626;
+  font-weight: 500;
+}
+
+.logout-link:hover {
+  background-color: #FEF2F2;
+  color: #B91C1C;
+}
+
+/* --------------------------------------------------
+   5. MAIN CONTENT VIEWPORT
+   Centered Content Area
+   -------------------------------------------------- */
+.notifications-viewport {
+  flex: 1;
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px 16px;
+}
+
+/* --------------------------------------------------
+   6. NOTIFICATIONS CONTENT CARD
+   Width: 500px–600px (Target: 540px)
+   -------------------------------------------------- */
+.notifications-card {
+  width: var(--card-width);
+  max-width: 100%;
+  background-color: var(--white);
+  border: 1px solid var(--border-card);
+  border-radius: 7px;
+  box-shadow: 0 3px 15px rgba(30, 70, 120, 0.05);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Header */
+.notifications-card-header {
+  padding: 15px 18px;
+  border-bottom: 1px solid var(--border-row);
+  background-color: var(--white);
+}
+
+.header-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------
+   7. NOTIFICATION ROWS LIST
+   -------------------------------------------------- */
+.notifications-list, .notification-items-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.notification-row {
+  min-height: 64px;
+  padding: 12px 18px;
+  border-bottom: 1px solid var(--border-row);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background-color: var(--white);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  user-select: none;
+  position: relative;
+}
+
+.notification-row:last-child {
+  border-bottom: none;
+}
+
+.notification-row:hover {
+  background-color: #F8FAFD;
+}
+
+/* Unread subtle highlight */
+.notification-row.unread {
+  background-color: #F4F8FE;
+}
+
+.notifications-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-row);
+  background-color: var(--white);
+}
+
+.notifications-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.notif-pill-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: var(--primary-blue);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+.btn-mark-all-read {
+  background: none;
+  border: none;
+  color: var(--primary-blue);
+  font-size: 12.5px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+}
+
+.btn-mark-all-read:hover {
+  background-color: var(--light-blue-active);
+}
+
+/* Notification Avatar & Type Badges */
+.notif-avatar-wrapper {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+}
+
+.mini-type-badge {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 2px #FFFFFF;
+}
+
+.mini-type-badge.icon-follow {
+  background-color: #EEF5FF;
+  color: #1976F3;
+}
+
+.mini-type-badge.icon-like {
+  background-color: #FFE8EC;
+  color: #FF4F70;
+}
+
+.mini-type-badge.icon-comment {
+  background-color: #ECFDF5;
+  color: #10B981;
+}
+
+.mini-type-badge.icon-message {
+  background-color: #EEF2FF;
+  color: #6366F1;
+}
+
+/* Notification Text Content */
+.notif-text-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.notif-message-text {
+  font-size: 13.5px;
+  color: var(--dark-navy);
+  line-height: 1.4;
+  margin: 0;
+}
+
+.notif-user-bold {
+  font-weight: 700;
+  color: var(--dark-navy);
+}
+
+.notif-time-ago {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  display: block;
+  margin-top: 2px;
+}
+
+.btn-dismiss-notif:hover {
+  color: #EF4444 !important;
+}
+
+/* --------------------------------------------------
+   8. RESPONSIVE DESIGN
+   -------------------------------------------------- */
+
+/* Tablet (Under 780px) */
+@media (max-width: 780px) {
+  :root {
+    --sidebar-width: 140px;
+    --card-width: 480px;
+  }
+
+  .sidebar {
+    padding: 14px 8px;
+  }
+
+  .nav-link {
+    padding: 7px 6px;
+    gap: 6px;
+    font-size: 9.5px;
+  }
+}
+
+/* Mobile (Under 640px) */
+@media (max-width: 640px) {
+  .notifications-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    height: auto;
+    border-right: none;
+    border-bottom: 1px solid var(--border-sidebar);
+    padding: 8px 12px;
+  }
+
+  .sidebar-logo,
+  .sidebar-bottom {
+    display: none;
+  }
+
+  .nav-list {
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 2px;
+  }
+
+  .nav-link {
+    padding: 5px 8px;
+    flex-direction: column;
+    gap: 3px;
+    font-size: 8.5px;
+  }
+
+  .notifications-viewport {
+    padding: 14px 10px 30px;
+    align-items: flex-start;
+  }
+
+  .notifications-card {
+    width: 100%;
+  }
+
+  .notification-row {
+    padding: 0 12px;
+    gap: 10px;
+  }
+}

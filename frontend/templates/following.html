@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Following ({{ request.user.username }})</title>
+  <meta name="description" content="MiniSocial following list for {{ request.user.username }}.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/followers.css' %}">
+</head>
+<body>
+
+  <!-- Centered Page Layout Wrapper -->
+  <main class="page-container">
+    <div class="followers-card" id="followers-card">
+      
+      <!-- ==================== 1. MOUNTAIN COVER IMAGE ==================== -->
+      <div class="cover-image-box">
+        <svg class="cover-svg" viewBox="0 0 380 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sunset-sky-mini" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#312E81"/>
+              <stop offset="35%" stop-color="#6366F1"/>
+              <stop offset="65%" stop-color="#F43F5E"/>
+              <stop offset="85%" stop-color="#FB923C"/>
+              <stop offset="100%" stop-color="#FDE047"/>
+            </linearGradient>
+            <linearGradient id="mtn-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1E1B4B" stop-opacity="0.9"/>
+              <stop offset="100%" stop-color="#0F172A"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="380" height="80" fill="url(#sunset-sky-mini)"/>
+          <circle cx="210" cy="50" r="16" fill="#FFF7ED" opacity="0.95"/>
+          <circle cx="210" cy="50" r="26" fill="#FED7AA" opacity="0.35"/>
+          <path d="M0 80 L0 52 L45 34 L110 58 L160 28 L230 52 L290 22 L340 50 L380 32 L380 80 Z" fill="#3730A3" opacity="0.8"/>
+          <path d="M0 80 L0 62 L60 45 L130 68 L190 38 L260 64 L320 36 L380 58 L380 80 Z" fill="url(#mtn-grad)"/>
+        </svg>
+
+        <a href="{% url 'home' %}" style="position: absolute; top: 8px; left: 10px; background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 9px; font-weight: 600; padding: 3px 8px; border-radius: 4px; backdrop-filter: blur(4px);">
+          ← Feed
+        </a>
+      </div>
+
+      <!-- ==================== 2. PROFILE INFORMATION AREA ==================== -->
+      <div class="profile-info-section">
+        
+        <div class="avatar-overlap-wrapper">
+          <div class="profile-avatar" id="avatar-user" style="overflow: hidden; border-radius: 50%;">
+            {% if request.user.profile.picture_url %}
+            <img src="{{ request.user.profile.picture_url }}" alt="{{ request.user.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+            {% else %}
+            <svg class="avatar-svg" viewBox="0 0 68 68" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="34" cy="34" r="34" fill="{{ request.user.profile.avatar_color|default:'#6366F1' }}"/>
+              <circle cx="34" cy="25" r="14" fill="#FEEAA1"/>
+              <path d="M22 24C22 14 46 14 46 24C46 26 42 26 39 22C36 19 31 19 27 22C25 25 22 26 22 24Z" fill="#3D405B"/>
+              <circle cx="30" cy="26" r="1.5" fill="#3D405B"/>
+              <circle cx="38" cy="26" r="1.5" fill="#3D405B"/>
+              <path d="M31 31Q34 34 37 31" stroke="#E07A5F" stroke-width="1.4" stroke-linecap="round"/>
+              <path d="M17 62C17 49 25 44 34 44C43 44 51 49 51 62H17Z" fill="{{ request.user.profile.avatar_color|default:'#818CF8' }}"/>
+            </svg>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="user-details-group">
+          <div class="user-name-row">
+            <span class="user-display-name">{{ request.user.username }}</span>
+            <span class="user-handle">@{{ request.user.username }}</span>
+          </div>
+
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-count" id="header-followers-count">{{ followers_count }}</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-count" id="header-following-count">{{ following_count }}</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="follow-action-wrap">
+          <a href="{% url 'profile' %}" class="btn-profile-follow" style="text-decoration: none; line-height: 26px; text-align: center;">
+            Profile
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ==================== 3. PROFILE TABS ==================== -->
+      <nav class="profile-tabs-nav" aria-label="Profile navigation">
+        <ul class="tabs-list">
+          <li class="tab-item">
+            <a href="{% url 'profile' %}" class="tab-btn" style="text-decoration: none; display: block;">Posts</a>
+          </li>
+          <li class="tab-item">
+            <button type="button" class="tab-btn" data-tab="about">About</button>
+          </li>
+          <li class="tab-item">
+            <a href="{% url 'followers' %}" class="tab-btn" style="text-decoration: none; display: block;">Followers</a>
+          </li>
+          <li class="tab-item">
+            <a href="{% url 'following' %}" class="tab-btn active" style="text-decoration: none; display: block;">Following</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ==================== 4. FOLLOWING CONTENT SECTION ==================== -->
+      <div class="followers-content-area" id="followers-content-section">
+        
+        <div class="section-heading-wrap">
+          <h1 class="section-heading" id="followers-section-title">Following ({{ following_count }})</h1>
+        </div>
+
+        <div class="followers-list-stream" id="followers-stream">
+          {% for item in following_list %}
+          <div class="follower-row" id="following-{{ item.user.id }}">
+            <div class="follower-avatar-wrap" aria-hidden="true" style="overflow: hidden; border-radius: 50%;">
+              {% if item.user.profile.picture_url %}
+              <img src="{{ item.user.profile.picture_url }}" alt="{{ item.user.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+              {% else %}
+              <svg class="avatar-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="{{ item.user.profile.avatar_color|default:'#1976F3' }}"/>
+                <circle cx="16" cy="12" r="6" fill="#FCD5B5"/>
+                <path d="M11 10C11 6 21 6 21 10C21 11 19 8 16 8C13 8 11 11 11 10Z" fill="#1E293B"/>
+                <path d="M8 26C8 21 12 19 16 19C20 19 24 21 24 26H8Z" fill="{{ item.user.profile.avatar_color|default:'#1976F3' }}"/>
+              </svg>
+              {% endif %}
+            </div>
+            <div class="follower-meta">
+              <a href="{% url 'user_profile' item.user.username %}" class="follower-username" style="text-decoration: none; color: inherit;">
+                {{ item.user.username }}
+              </a>
+              <span class="follower-handle">@{{ item.user.username }}</span>
+            </div>
+            <div class="follower-btn-wrap">
+              <button 
+                type="button" 
+                class="btn-follow-toggle following" 
+                data-username="{{ item.user.username }}"
+                data-following="true"
+              >
+                Following
+              </button>
+            </div>
+          </div>
+          {% empty %}
+          <div style="text-align: center; padding: 24px 14px; font-size: 11px; color: #64748B;">
+            You are not following anyone yet.
+          </div>
+          {% endfor %}
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="{% static 'js/followers.js' %}"></script>
+</body>
+</html>

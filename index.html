@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Your World, Your Community</title>
+  <meta name="description" content="MiniSocial is a modern social media platform where you can share your thoughts, follow your favorite people, and be part of a community that cares.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- Ambient background glow elements -->
+  <div class="ambient-glow glow-1" aria-hidden="true"></div>
+  <div class="ambient-glow glow-2" aria-hidden="true"></div>
+  <div class="ambient-glow glow-3" aria-hidden="true"></div>
+
+  <!-- ==================== 1. NAVIGATION BAR ==================== -->
+  <header class="navbar-wrapper">
+    <div class="navbar container">
+      <!-- Brand Logo -->
+      <a href="#" class="brand-logo" id="nav-brand">
+        <span class="logo-icon-bubble">
+          <svg viewBox="0 0 24 24" fill="none" class="brand-svg-icon" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 11.5C20.02 8.46 16.42 6 12 6C7.58 6 4 8.46 4 11.5C4 13.9 6.25 15.93 9.4 16.66C9.64 17.37 9.17 19.12 7.7 20C9.68 19.9 12.04 18.96 13.3 17.91C17.58 17.37 20.02 14.54 20 11.5Z" fill="white"/>
+            <circle cx="9" cy="11.5" r="1.25" fill="#4F46E5"/>
+            <circle cx="12" cy="11.5" r="1.25" fill="#4F46E5"/>
+            <circle cx="15" cy="11.5" r="1.25" fill="#4F46E5"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <span class="brand-mini">Mini</span><span class="brand-social">Social</span>
+        </span>
+      </a>
+
+      <!-- Center Navigation Links -->
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#home" class="nav-link active" id="nav-home">Home</a>
+        <a href="#features" class="nav-link" id="nav-features">Features</a>
+        <a href="#how-it-works" class="nav-link" id="nav-how-it-works">About</a>
+        <a href="#contact" class="nav-link" id="nav-contact">Contact</a>
+      </nav>
+
+      <!-- Right Auth Actions -->
+      <div class="nav-actions">
+        <button type="button" class="btn btn-outline" id="btn-login" aria-label="Log In">Login</button>
+        <button type="button" class="btn btn-primary" id="btn-signup" aria-label="Sign Up">Sign Up</button>
+      </div>
+
+      <!-- Mobile Hamburger Toggle -->
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer Menu -->
+  <div class="mobile-drawer" id="mobile-drawer">
+    <nav class="mobile-drawer-links">
+      <a href="#home" class="mobile-link active">Home</a>
+      <a href="#features" class="mobile-link">Features</a>
+      <a href="#how-it-works" class="mobile-link">About</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </nav>
+    <div class="mobile-drawer-actions">
+      <button type="button" class="btn btn-outline btn-block" id="mobile-btn-login">Login</button>
+      <button type="button" class="btn btn-primary btn-block" id="mobile-btn-signup">Sign Up</button>
+    </div>
+  </div>
+
+  <main>
+    <!-- ==================== 2. HERO SECTION ==================== -->
+    <section class="hero-section" id="home">
+      <div class="container hero-container">
+        
+        <!-- Left Hero Content -->
+        <div class="hero-content">
+          <!-- Tag Pill -->
+          <div class="hero-pill" id="hero-tag-pill">
+            <span class="pill-dot"></span>
+            <span>Connect &nbsp;•&nbsp; Share &nbsp;•&nbsp; Grow</span>
+          </div>
+
+          <!-- Main Heading -->
+          <h1 class="hero-heading">
+            <span class="hero-heading-line1">Your World,</span>
+            <span class="hero-heading-line2">Your Community</span>
+          </h1>
+
+          <!-- Description -->
+          <p class="hero-description">
+            MiniSocial is a modern social media platform where you can share your thoughts, follow your favorite people, and be part of a community that cares.
+          </p>
+
+          <!-- Call To Action Buttons -->
+          <div class="hero-actions">
+            <button type="button" class="btn btn-primary btn-cta" id="cta-get-started">
+              Get Started <span class="arrow-icon">→</span>
+            </button>
+            <a href="#features" class="btn btn-outline btn-cta-sec" id="cta-learn-more">
+              Learn More
+            </a>
+          </div>
+
+          <!-- Social Proof Section -->
+          <div class="social-proof">
+            <div class="avatar-group" aria-label="Featured community members">
+              <div class="avatar-stack-item">
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=faces" alt="Community member" class="avatar-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%236366f1\'/><text x=\'50\' y=\'58\' font-size=\'36\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>A</text></svg>'">
+              </div>
+              <div class="avatar-stack-item">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces" alt="Community member" class="avatar-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%232563eb\'/><text x=\'50\' y=\'58\' font-size=\'36\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>S</text></svg>'">
+              </div>
+              <div class="avatar-stack-item">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces" alt="Community member" class="avatar-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%23ec4899\'/><text x=\'50\' y=\'58\' font-size=\'36\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>P</text></svg>'">
+              </div>
+              <div class="avatar-stack-item">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces" alt="Community member" class="avatar-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'50\' fill=\'%2310b981\'/><text x=\'50\' y=\'58\' font-size=\'36\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>R</text></svg>'">
+              </div>
+            </div>
+            <p class="social-proof-text">
+              Join <strong class="highlight-stat">1k+</strong> amazing people already on MiniSocial!
+            </p>
+          </div>
+        </div>
+
+        <!-- ==================== 3, 4, 5, 6. HERO PRODUCT MOCKUP AREA ==================== -->
+        <div class="hero-visual-wrapper" id="hero-mockup-area">
+          
+          <!-- Subtle Dotted SVG Curve Connectors -->
+          <svg class="decorative-dots-connector" viewBox="0 0 540 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M 40,80 Q 20,200 60,340" stroke="#CBD5E1" stroke-width="1.8" stroke-dasharray="4 6" stroke-linecap="round"/>
+            <path d="M 460,70 Q 520,180 470,300" stroke="#CBD5E1" stroke-width="1.8" stroke-dasharray="4 6" stroke-linecap="round"/>
+            <path d="M 480,240 Q 530,340 440,430" stroke="#CBD5E1" stroke-width="1.5" stroke-dasharray="3 5" stroke-linecap="round"/>
+          </svg>
+
+          <!-- 6. Floating Decorative Badge 1: Heart (Left/Upper) -->
+          <div class="floating-badge badge-heart" id="floating-badge-heart" title="Likes">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+            </svg>
+          </div>
+
+          <!-- 6. Floating Decorative Badge 2: Chat (Left/Lower) -->
+          <div class="floating-badge badge-chat" id="floating-badge-chat" title="Conversations">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.17L4 17.17V4h16v12z"/>
+              <circle cx="8" cy="10" r="1.2"/>
+              <circle cx="12" cy="10" r="1.2"/>
+              <circle cx="16" cy="10" r="1.2"/>
+            </svg>
+          </div>
+
+          <!-- 6. Floating Decorative Badge 3: Users (Right/Upper) -->
+          <div class="floating-badge badge-users" id="floating-badge-users" title="Communities">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+          </div>
+
+          <!-- ==================== 3. MAIN DASHBOARD CARD ==================== -->
+          <div class="dashboard-mockup" id="main-dashboard-card">
+            
+            <!-- Dashboard Top Bar -->
+            <div class="dash-topbar">
+              <div class="dash-top-left">
+                <span class="dash-logo-bubble">
+                  <svg viewBox="0 0 24 24" fill="none">
+                    <path d="M20 11.5C20.02 8.46 16.42 6 12 6C7.58 6 4 8.46 4 11.5C4 13.9 6.25 15.93 9.4 16.66C9.64 17.37 9.17 19.12 7.7 20C9.68 19.9 12.04 18.96 13.3 17.91C17.58 17.37 20.02 14.54 20 11.5Z" fill="white"/>
+                  </svg>
+                </span>
+                <span class="dash-brand-title">Mini<span class="dash-brand-gradient">Social</span></span>
+              </div>
+
+              <!-- Search Bar -->
+              <div class="dash-search-container">
+                <svg class="dash-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="11" cy="11" r="7"/>
+                  <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
+                <input type="text" class="dash-search-input" placeholder="Search MiniSocial..." readonly>
+              </div>
+
+              <!-- Top Right Icons -->
+              <div class="dash-top-right">
+                <div class="dash-bell-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                  </svg>
+                  <span class="dash-bell-dot"></span>
+                </div>
+                <div class="dash-user-chip">
+                  <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=60&h=60&fit=crop&crop=faces" alt="Bhargavi" class="dash-chip-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 60 60\'><circle cx=\'30\' cy=\'30\' r=\'30\' fill=\'%236366f1\'/><text x=\'30\' y=\'36\' font-size=\'22\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>B</text></svg>'">
+                  <svg class="dash-arrow-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6 9 12 15 18 9"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- Dashboard Body: Sidebar + Main Feed -->
+            <div class="dash-body">
+              
+              <!-- Left Sidebar -->
+              <aside class="dash-sidebar">
+                <ul class="dash-nav-list">
+                  <li class="dash-nav-item active">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                      <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    <span>Home</span>
+                  </li>
+                  <li class="dash-nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="10"/>
+                      <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                    </svg>
+                    <span>Explore</span>
+                  </li>
+                  <li class="dash-nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                      <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span>Notifications</span>
+                  </li>
+                  <li class="dash-nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span>Messages</span>
+                  </li>
+                  <li class="dash-nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                      <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>Profile</span>
+                  </li>
+                  <li class="dash-nav-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="12" r="3"/>
+                      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <span>Settings</span>
+                  </li>
+                </ul>
+              </aside>
+
+              <!-- Main Feed -->
+              <div class="dash-feed">
+                
+                <!-- Post Composer -->
+                <div class="dash-composer">
+                  <div class="composer-input-row">
+                    <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=50&h=50&fit=crop&crop=faces" alt="You" class="composer-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 50 50\'><circle cx=\'25\' cy=\'25\' r=\'25\' fill=\'%236366f1\'/></svg>'">
+                    <input type="text" class="composer-input" id="composer-text-input" placeholder="What’s on your mind?">
+                    <button type="button" class="btn-dash-post" id="btn-mockup-post">Post</button>
+                  </div>
+                </div>
+
+                <!-- Feed Container with Posts -->
+                <div class="dash-posts-container" id="dash-posts-stream">
+                  
+                  <!-- Post 1 by sai_kumar -->
+                  <article class="feed-post-card" id="primary-feed-post">
+                    <!-- Post Header -->
+                    <div class="feed-post-header">
+                      <div class="post-user-info">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=70&h=70&fit=crop&crop=faces" alt="sai_kumar" class="post-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 70 70\'><circle cx=\'35\' cy=\'35\' r=\'35\' fill=\'%232563eb\'/><text x=\'35\' y=\'42\' font-size=\'26\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>S</text></svg>'">
+                        <div>
+                          <h4 class="post-username">sai_kumar</h4>
+                          <span class="post-timestamp">2 hrs ago</span>
+                        </div>
+                      </div>
+                      <button class="post-dots" aria-label="Post options">•••</button>
+                    </div>
+
+                    <!-- Post Content -->
+                    <p class="post-caption">
+                      Hello everyone! Welcome to my app. 🚀
+                    </p>
+
+                    <!-- Scenic Landscape Image -->
+                    <div class="post-media-box">
+                      <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=300&fit=crop" alt="Scenic mountain and lake landscape" class="post-landscape-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 600 300\'><defs><linearGradient id=\'grad\' x1=\'0\' y1=\'0\' x2=\'1\' y2=\'1\'><stop offset=\'0%23\' stop-color=\'%232563eb\'/><stop offset=\'100%23\' stop-color=\'%23a855f7\'/></linearGradient></defs><rect width=\'600\' height=\'300\' fill=\'url(%23grad)\'/><path d=\'M0 240 L160 140 L280 220 L420 110 L600 250 L600 300 L0 300 Z\' fill=\'%2314213d\' opacity=\'0.7\'/><circle cx=\'480\' cy=\'80\' r=\'40\' fill=\'%23fde047\' opacity=\'0.9\'/></svg>'">
+                    </div>
+
+                    <!-- Post Stats Count -->
+                    <div class="post-stats-row">
+                      <div class="stats-left">
+                        <span class="stat-bubble heart-bubble">❤️ <span id="mockup-like-count">12</span></span>
+                        <span class="stat-bubble comment-bubble">💬 <span id="mockup-comment-count">4</span></span>
+                      </div>
+                    </div>
+
+                    <!-- Post Action Buttons (Like / Comment) -->
+                    <div class="post-actions-row">
+                      <button type="button" class="post-action-btn" id="btn-mockup-like">
+                        <svg class="action-icon heart-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                        <span class="action-label" id="like-action-label">Like</span>
+                      </button>
+                      <button type="button" class="post-action-btn" id="btn-mockup-comment">
+                        <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                        </svg>
+                        <span>Comment</span>
+                      </button>
+                    </div>
+                  </article>
+
+                  <!-- Partially Visible Second Post Underneath -->
+                  <article class="feed-post-card post-peek" aria-hidden="true">
+                    <div class="feed-post-header">
+                      <div class="post-user-info">
+                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=70&h=70&fit=crop&crop=faces" alt="priya" class="post-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 70 70\'><circle cx=\'35\' cy=\'35\' r=\'35\' fill=\'%23ec4899\'/></svg>'">
+                        <div>
+                          <h4 class="post-username">priya</h4>
+                          <span class="post-timestamp">4 hrs ago</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="post-caption">
+                      Loving the community vibe here on MiniSocial! Such great inspirations... ✨
+                    </p>
+                  </article>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==================== 4. PROFILE CARD BESIDE DASHBOARD ==================== -->
+          <div class="floating-profile-card" id="floating-profile-bhargavi">
+            <div class="prof-avatar-wrapper">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=120&h=120&fit=crop&crop=faces" alt="Bhargavi" class="prof-avatar-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 120 120\'><circle cx=\'60\' cy=\'60\' r=\'60\' fill=\'%236366f1\'/><text x=\'60\' y=\'72\' font-size=\'44\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>B</text></svg>'">
+            </div>
+            
+            <h3 class="prof-username">
+              @bhargavi <span class="verified-badge" title="Verified Member">✓</span>
+            </h3>
+
+            <!-- Stats -->
+            <div class="prof-stats-grid">
+              <div class="prof-stat-box">
+                <span class="prof-stat-num" id="bhargavi-followers">25</span>
+                <span class="prof-stat-lbl">Followers</span>
+              </div>
+              <div class="prof-stat-box">
+                <span class="prof-stat-num">18</span>
+                <span class="prof-stat-lbl">Following</span>
+              </div>
+            </div>
+
+            <!-- Follow Button -->
+            <button type="button" class="btn btn-follow-gradient" id="btn-follow-bhargavi" data-following="false">
+              Follow
+            </button>
+          </div>
+
+          <!-- ==================== 5. POPULAR PEOPLE CARD ==================== -->
+          <div class="floating-popular-card" id="floating-popular-people">
+            <h3 class="popular-card-title">Popular People</h3>
+
+            <div class="popular-list">
+              <!-- User 1: sai_kumar -->
+              <div class="popular-user-row">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&h=80&fit=crop&crop=faces" alt="sai_kumar" class="pop-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 80 80\'><circle cx=\'40\' cy=\'40\' r=\'40\' fill=\'%232563eb\'/><text x=\'40\' y=\'48\' font-size=\'30\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>S</text></svg>'">
+                <div class="pop-info">
+                  <span class="pop-name">sai_kumar</span>
+                  <span class="pop-handle">@saikumar</span>
+                </div>
+                <button type="button" class="btn-pop-follow" data-following="false">Follow</button>
+              </div>
+
+              <!-- User 2: priya -->
+              <div class="popular-user-row">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&h=80&fit=crop&crop=faces" alt="priya" class="pop-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 80 80\'><circle cx=\'40\' cy=\'40\' r=\'40\' fill=\'%23ec4899\'/><text x=\'40\' y=\'48\' font-size=\'30\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>P</text></svg>'">
+                <div class="pop-info">
+                  <span class="pop-name">priya</span>
+                  <span class="pop-handle">@priya</span>
+                </div>
+                <button type="button" class="btn-pop-follow" data-following="false">Follow</button>
+              </div>
+
+              <!-- User 3: rahul -->
+              <div class="popular-user-row">
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=80&h=80&fit=crop&crop=faces" alt="rahul" class="pop-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 80 80\'><circle cx=\'40\' cy=\'40\' r=\'40\' fill=\'%236366f1\'/><text x=\'40\' y=\'48\' font-size=\'30\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>R</text></svg>'">
+                <div class="pop-info">
+                  <span class="pop-name">rahul</span>
+                  <span class="pop-handle">@rahul</span>
+                </div>
+                <button type="button" class="btn-pop-follow" data-following="false">Follow</button>
+              </div>
+
+              <!-- User 4: ananya -->
+              <div class="popular-user-row">
+                <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=80&h=80&fit=crop&crop=faces" alt="ananya" class="pop-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 80 80\'><circle cx=\'40\' cy=\'40\' r=\'40\' fill=\'%2310b981\'/><text x=\'40\' y=\'48\' font-size=\'30\' fill=\'white\' font-family=\'sans-serif\' text-anchor=\'middle\'>A</text></svg>'">
+                <div class="pop-info">
+                  <span class="pop-name">ananya</span>
+                  <span class="pop-handle">@ananya</span>
+                </div>
+                <button type="button" class="btn-pop-follow" data-following="false">Follow</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 7. FEATURES SECTION ==================== -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="features-grid">
+          
+          <!-- Feature 1: User Profiles -->
+          <div class="feature-card" id="feature-profiles">
+            <div class="feature-icon-wrapper pastel-blue">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">User Profiles</h3>
+            <p class="feature-desc">
+              Create your profile, show your personality, and connect with others.
+            </p>
+          </div>
+
+          <!-- Feature 2: Posts & Comments -->
+          <div class="feature-card" id="feature-posts">
+            <div class="feature-icon-wrapper pastel-purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                <polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/>
+                <line x1="16" y1="17" x2="8" y2="17"/>
+                <polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Posts & Comments</h3>
+            <p class="feature-desc">
+              Share your thoughts and engage in meaningful conversations.
+            </p>
+          </div>
+
+          <!-- Feature 3: Like System -->
+          <div class="feature-card" id="feature-likes">
+            <div class="feature-icon-wrapper pastel-pink">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Like System</h3>
+            <p class="feature-desc">
+              Show appreciation and support the content you love.
+            </p>
+          </div>
+
+          <!-- Feature 4: Follow System -->
+          <div class="feature-card" id="feature-follow">
+            <div class="feature-icon-wrapper pastel-indigo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="feature-title">Follow System</h3>
+            <p class="feature-desc">
+              Discover new people and build your network.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 8. HOW IT WORKS SECTION (ABOUT) ==================== -->
+    <section class="how-it-works-section" id="how-it-works">
+      <div class="container how-container">
+        
+        <!-- Left Side Text -->
+        <div class="how-intro">
+          <span class="how-badge-label">ABOUT MINISOCIAL</span>
+          <h2 class="how-heading">Connecting People, Simply & Authentically</h2>
+          <p class="how-desc">
+            MiniSocial was created with a clear vision: an authentic, privacy-first social platform without cluttered feeds, distracting algorithms, or fake follower numbers.
+          </p>
+          <div class="about-highlights" style="margin-top: 18px; display: flex; flex-direction: column; gap: 10px;">
+            <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">
+              <span style="color: var(--primary-blue); font-weight: 700;">✓</span>
+              <span><strong>100% Real Community:</strong> Pure database-driven profiles and verified relationships.</span>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">
+              <span style="color: var(--primary-purple); font-weight: 700;">✓</span>
+              <span><strong>Live Engagement:</strong> Real-time likes, comments, and direct 1-to-1 conversations.</span>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; color: var(--emerald-green); font-weight: 700;">
+              <span style="color: var(--emerald-green); font-weight: 700;">✓</span>
+              <span><strong>Privacy & Control:</strong> Complete control over your profile, bio, and uploads.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Side Horizontal 4-Step Process -->
+        <div class="how-steps-flow">
+          
+          <!-- Step 1 -->
+          <div class="step-item" id="step-1">
+            <div class="step-bubble step-color-purple" title="Step 1">
+              <span class="step-num">1</span>
+              <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+            </div>
+            <h3 class="step-title">Create Account</h3>
+            <p class="step-sub">Sign up in seconds with your email.</p>
+          </div>
+
+          <div class="step-arrow-divider" aria-hidden="true">→</div>
+
+          <!-- Step 2 -->
+          <div class="step-item" id="step-2">
+            <div class="step-bubble step-color-blue" title="Step 2">
+              <span class="step-num">2</span>
+              <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </div>
+            <h3 class="step-title">Build Your Profile</h3>
+            <p class="step-sub">Add your details and make it yours.</p>
+          </div>
+
+          <div class="step-arrow-divider" aria-hidden="true">→</div>
+
+          <!-- Step 3 -->
+          <div class="step-item" id="step-3">
+            <div class="step-bubble step-color-pink" title="Step 3">
+              <span class="step-num">3</span>
+              <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <h3 class="step-title">Share & Engage</h3>
+            <p class="step-sub">Post, like, comment and follow.</p>
+          </div>
+
+          <div class="step-arrow-divider" aria-hidden="true">→</div>
+
+          <!-- Step 4 -->
+          <div class="step-item" id="step-4">
+            <div class="step-bubble step-color-green" title="Step 4">
+              <span class="step-num">4</span>
+              <svg class="step-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="step-title">Grow Your Network</h3>
+            <p class="step-sub">Connect with people who inspire you.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT SECTION ==================== -->
+    <section class="contact-section" id="contact" style="padding: 72px 0; background: #FFFFFF; border-top: 1px solid rgba(226, 232, 240, 0.7); position: relative; z-index: 2;">
+      <div class="container" style="max-width: 1140px; margin: 0 auto; padding: 0 24px;">
+        
+        <!-- Header -->
+        <div style="text-align: center; max-width: 620px; margin: 0 auto 44px auto;">
+          <span style="font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; color: var(--primary-blue); text-transform: uppercase; margin-bottom: 8px; display: inline-block;">GET IN TOUCH</span>
+          <h2 style="font-family: var(--font-heading); font-size: 2.2rem; font-weight: 800; color: var(--navy-dark); letter-spacing: -0.02em; margin-bottom: 12px; line-height: 1.2;">Contact MiniSocial</h2>
+          <p style="font-size: 0.95rem; color: var(--text-secondary); line-height: 1.6;">
+            Have questions, feedback, or need support? Our team and community moderators are here to assist you anytime.
+          </p>
+        </div>
+
+        <!-- Contact Cards Grid -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
+          
+          <!-- Card 1: Support Email -->
+          <div style="background: var(--bg-soft-gray); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(37, 99, 235, 0.1); color: var(--primary-blue); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                <polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 6px;">Email Support</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
+              Send our support team your inquiries or technical questions. We reply quickly on all inquiries.
+            </p>
+            <a href="mailto:support@minisocial.local" style="font-size: 0.9rem; font-weight: 600; color: var(--primary-blue); text-decoration: none; margin-top: auto;">support@minisocial.local →</a>
+          </div>
+
+          <!-- Card 2: Community Office -->
+          <div style="background: var(--bg-soft-gray); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(99, 102, 241, 0.1); color: var(--primary-purple); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                <circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 6px;">Community Hub</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
+              Innovation Centre, Level 3<br>Bengaluru, Karnataka 560001
+            </p>
+            <span style="font-size: 0.9rem; font-weight: 600; color: var(--primary-purple); margin-top: auto;">Mon – Fri • 9:00 AM – 6:00 PM IST</span>
+          </div>
+
+          <!-- Card 3: Direct In-App Chat -->
+          <div style="background: var(--bg-soft-gray); border: 1px solid var(--border-light); border-radius: var(--radius-md); padding: 28px; box-shadow: var(--shadow-sm); display: flex; flex-direction: column;">
+            <div style="width: 48px; height: 48px; border-radius: 12px; background: rgba(16, 185, 129, 0.1); color: var(--emerald-green); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.15rem; font-weight: 700; color: var(--navy-dark); margin-bottom: 6px;">Direct Messaging</h3>
+            <p style="font-size: 0.88rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 16px;">
+              Already registered? Send direct messages to community moderators or users directly on MiniSocial.
+            </p>
+            <a href="login.html" style="font-size: 0.9rem; font-weight: 600; color: var(--emerald-green); text-decoration: none; margin-top: auto;">Open Messages →</a>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== 9. FOOTER ==================== -->
+  <footer class="footer-wrapper">
+    <div class="container footer-container">
+      
+      <!-- Left: Logo & Brand Name -->
+      <div class="footer-left">
+        <a href="#" class="brand-logo footer-logo">
+          <span class="logo-icon-bubble">
+            <svg viewBox="0 0 24 24" fill="none" class="brand-svg-icon">
+              <path d="M20 11.5C20.02 8.46 16.42 6 12 6C7.58 6 4 8.46 4 11.5C4 13.9 6.25 15.93 9.4 16.66C9.64 17.37 9.17 19.12 7.7 20C9.68 19.9 12.04 18.96 13.3 17.91C17.58 17.37 20.02 14.54 20 11.5Z" fill="white"/>
+            </svg>
+          </span>
+          <span class="brand-text">
+            <span class="footer-brand-mini">Mini</span><span class="brand-social">Social</span>
+          </span>
+        </a>
+      </div>
+
+      <!-- Center: Navigation -->
+      <nav class="footer-center">
+        <a href="#home" class="footer-link">Home</a>
+        <a href="#features" class="footer-link">Features</a>
+        <a href="#how-it-works" class="footer-link">About</a>
+        <a href="#contact" class="footer-link">Contact</a>
+      </nav>
+
+      <!-- Right: Social Media Icons + Tagline -->
+      <div class="footer-right">
+        <div class="footer-social-icons">
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+          </a>
+          <!-- GitHub -->
+          <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+            </svg>
+          </a>
+          <!-- Twitter/X -->
+          <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Twitter / X">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon-btn" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            </svg>
+          </a>
+        </div>
+        <p class="footer-tagline">Better Connections. A Brighter Community.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== AUTH MODALS ==================== -->
+  <div class="modal-backdrop" id="auth-modal" aria-hidden="true">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close-btn" aria-label="Close modal">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-logo-bubble">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M20 11.5C20.02 8.46 16.42 6 12 6C7.58 6 4 8.46 4 11.5C4 13.9 6.25 15.93 9.4 16.66C9.64 17.37 9.17 19.12 7.7 20C9.68 19.9 12.04 18.96 13.3 17.91C17.58 17.37 20.02 14.54 20 11.5Z" fill="white"/>
+          </svg>
+        </div>
+        <h3 class="modal-title" id="modal-title">Welcome to MiniSocial</h3>
+        <p class="modal-subtitle" id="modal-subtitle">Connect, share and grow with your community</p>
+      </div>
+
+      <form id="auth-form" onsubmit="return false;">
+        <div class="form-group" id="form-name-group">
+          <label for="input-fullname" class="form-label">Full Name</label>
+          <input type="text" id="input-fullname" class="form-input" placeholder="e.g. Bhargavi Sharma">
+        </div>
+        <div class="form-group">
+          <label for="input-email" class="form-label">Email Address</label>
+          <input type="email" id="input-email" class="form-input" placeholder="name@example.com" required>
+        </div>
+        <div class="form-group">
+          <label for="input-password" class="form-label">Password</label>
+          <input type="password" id="input-password" class="form-input" placeholder="••••••••" required>
+        </div>
+        
+        <button type="submit" class="btn btn-primary btn-block modal-submit-btn" id="modal-submit-btn">
+          Create Account
+        </button>
+      </form>
+
+      <div class="modal-switch-text">
+        <span id="modal-switch-prompt">Already have an account?</span>
+        <button type="button" class="btn-text-link" id="modal-toggle-auth">Log In</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-notification" id="toast-notify" role="alert" aria-live="polite">
+    <span class="toast-icon">✨</span>
+    <span class="toast-message" id="toast-text">Notification message</span>
+  </div>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

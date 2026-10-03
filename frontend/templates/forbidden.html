@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Access Denied — MiniSocial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body style="display: flex; align-items: center; justify-content: center; min-height: 100vh; background: #F8FAFC; font-family: 'Inter', sans-serif;">
+  <div style="background: #fff; border: 1px solid #E2E8F0; border-radius: 16px; padding: 40px; max-width: 460px; text-align: center; box-shadow: 0 4px 20px rgba(0,0,0,0.06);">
+    <div style="font-size: 48px; margin-bottom: 16px;">🔒</div>
+    <h1 style="font-size: 20px; font-weight: 700; color: #0F172A; margin: 0 0 10px 0;">Restricted Content</h1>
+    <p style="font-size: 13.5px; color: #64748B; line-height: 1.5; margin: 0 0 24px 0;">
+      {{ message|default:"You do not have permission to view this content. It may be restricted to circle members, followers, or the post author." }}
+    </p>
+    <a href="{% url 'home' %}" style="display: inline-block; background: #1976F3; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 8px; font-size: 13.5px; font-weight: 600;">
+      Return to Home Feed
+    </a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,302 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Personal Social Dashboard</title>
+  <meta name="description" content="Personal social journey, real-time analytics, and stats for your MiniSocial profile.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <style>
+    .dashboard-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+    .dash-header {
+      margin-bottom: 24px;
+    }
+    .dash-header h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0 0 4px 0;
+    }
+    .dash-header p {
+      font-size: 13px;
+      color: #64748B;
+      margin: 0;
+    }
+    .dash-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
+    }
+    .stat-card {
+      background: #ffffff;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+    }
+    .stat-card-title {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #64748B;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .stat-card-number {
+      font-size: 28px;
+      font-weight: 700;
+      color: #0F172A;
+      line-height: 1;
+    }
+    .stat-subtext {
+      font-size: 11.5px;
+      color: #10B981;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+    .activity-section {
+      background: #ffffff;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .activity-section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0 0 16px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .activity-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+    }
+    .activity-item {
+      background: #F8FAFC;
+      border: 1px solid #F1F5F9;
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .activity-label {
+      font-size: 13px;
+      color: #475569;
+    }
+    .activity-val {
+      font-size: 14px;
+      font-weight: 700;
+      color: #1976F3;
+    }
+    .mission-progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 10px 0;
+    }
+    .mission-progress-fill {
+      height: 100%;
+      background: #10B981;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="dashboard-sidebar">
+      <div class="sidebar-logo">
+        <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <span class="logo-icon-wrap">
+            <svg class="brand-icon-svg" viewBox="0 0 24 24" fill="none"><path d="M16.5 13C17.6 13 18.5 12.1 18.5 11C18.5 9.9 17.6 9 16.5 9C15.4 9 14.5 9.9 14.5 11C14.5 12.1 15.4 13 16.5 13ZM16.5 14.5C15.17 14.5 12.5 15.17 12.5 16.5V17.5H20.5V16.5C20.5 15.17 17.83 14.5 16.5 14.5Z" fill="#1976F3"/></svg>
+          </span>
+          <span class="logo-title">MiniSocial</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"><span class="nav-label">Home</span></a></li>
+          <li class="nav-item"><a href="{% url 'explore' %}" class="nav-link"><span class="nav-label">Explore</span></a></li>
+          <li class="nav-item"><a href="{% url 'circles' %}" class="nav-link"><span class="nav-label">Circles</span></a></li>
+          <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link active"><span class="nav-label">Dashboard</span></a></li>
+          <li class="nav-item"><a href="{% url 'notifications' %}" class="nav-link"><span class="nav-label">Notifications</span></a></li>
+          <li class="nav-item"><a href="{% url 'messages' %}" class="nav-link"><span class="nav-label">Messages</span></a></li>
+          <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link"><span class="nav-label">Profile</span></a></li>
+          <li class="nav-item"><a href="{% url 'settings' %}" class="nav-link"><span class="nav-label">Settings</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="{% url 'logout' %}" class="nav-link logout-link"><span class="nav-label">Logout</span></a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-user-area" style="margin-left: auto;">
+          <a href="{% url 'profile' %}" class="user-chip" style="text-decoration: none; color: inherit;">
+            <span class="user-name">@{{ current_user.username }}</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="feed-viewport">
+        <div class="dashboard-container">
+          
+          <div class="dash-header">
+            <h1>My Social Journey</h1>
+            <p>Real-time insights and authenticated statistics from your social activity.</p>
+          </div>
+
+          <!-- Statistics Cards Grid -->
+          <div class="dash-stats-grid">
+            
+            <div class="stat-card">
+              <span class="stat-card-title">Posts</span>
+              <span class="stat-card-number">{{ posts_count }}</span>
+              <span class="stat-subtext">{{ posts_this_week }} this week</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Comments</span>
+              <span class="stat-card-number">{{ comments_count }}</span>
+              <span class="stat-subtext">{{ comments_this_week }} this week</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Likes Received</span>
+              <span class="stat-card-number" style="color: #FF4D67;">{{ likes_received }}</span>
+              <span class="stat-subtext">{{ reactions_received_week }} new this week</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Likes Given</span>
+              <span class="stat-card-number">{{ likes_given }}</span>
+              <span class="stat-subtext" style="color: #64748B;">Support to peers</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Followers</span>
+              <span class="stat-card-number">{{ followers_count }}</span>
+              <span class="stat-subtext">+{{ new_followers_week }} this week</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Following</span>
+              <span class="stat-card-number">{{ following_count }}</span>
+              <span class="stat-subtext" style="color: #64748B;">Connected users</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Circle Memberships</span>
+              <span class="stat-card-number" style="color: #1976F3;">{{ circle_memberships }}</span>
+              <span class="stat-subtext" style="color: #64748B;">Active circles</span>
+            </div>
+
+            <div class="stat-card">
+              <span class="stat-card-title">Polls Created</span>
+              <span class="stat-card-number">{{ polls_created }}</span>
+              <span class="stat-subtext">{{ polls_voted }} votes cast</span>
+            </div>
+
+          </div>
+
+          <!-- Activity Breakdown Section -->
+          <section class="activity-section">
+            <h2 class="activity-section-title">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#1976F3" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+              Activity Breakdown
+            </h2>
+
+            <div class="activity-list">
+              <div class="activity-item">
+                <span class="activity-label">Posts this week</span>
+                <span class="activity-val">{{ posts_this_week }}</span>
+              </div>
+              <div class="activity-item">
+                <span class="activity-label">Posts this month</span>
+                <span class="activity-val">{{ posts_this_month }}</span>
+              </div>
+              <div class="activity-item">
+                <span class="activity-label">Comments this week</span>
+                <span class="activity-val">{{ comments_this_week }}</span>
+              </div>
+              <div class="activity-item">
+                <span class="activity-label">New followers this week</span>
+                <span class="activity-val">+{{ new_followers_week }}</span>
+              </div>
+              <div class="activity-item">
+                <span class="activity-label">Poll participation</span>
+                <span class="activity-val">{{ polls_voted }} votes</span>
+              </div>
+              <div class="activity-item">
+                <span class="activity-label">Circle micro-communities</span>
+                <span class="activity-val">{{ circle_memberships }}</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- Today's Missions Progress Section -->
+          <section class="activity-section">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2 class="activity-section-title" style="margin: 0;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                Today's Social Missions
+              </h2>
+              <span style="font-size: 13px; font-weight: 700; color: #10B981;">
+                {{ completed_missions }} / {{ total_missions }} completed
+              </span>
+            </div>
+
+            <div class="mission-progress-bar">
+              <div class="mission-progress-fill" style="width: {% if total_missions > 0 %}{% widthratio completed_missions total_missions 100 %}{% else %}0{% endif %}%;"></div>
+            </div>
+            
+            <p style="font-size: 12.5px; color: #64748B; margin: 0;">
+              {% if completed_missions == total_missions and total_missions > 0 %}
+              🎉 Outstanding! You completed all daily missions today.
+              {% else %}
+              Engage with comments, support posts with reactions, or cast a poll vote to complete today's mission.
+              {% endif %}
+            </p>
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

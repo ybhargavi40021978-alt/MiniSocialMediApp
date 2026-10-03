@@ -1,0 +1,235 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Explore & Topics</title>
+  <meta name="description" content="Explore topics, customize your interests, and discover relevant discussions.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <style>
+    .explore-container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+    .topic-pill-box {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .topic-btn {
+      background: #F1F5F9;
+      border: 1px solid #E2E8F0;
+      color: #334155;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s;
+    }
+    .topic-btn:hover {
+      background: #E2E8F0;
+      color: #0F172A;
+    }
+    .topic-btn.selected {
+      background: #1976F3;
+      border-color: #1976F3;
+      color: #ffffff;
+    }
+    .interest-btn {
+      font-size: 11px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-left: 4px;
+      opacity: 0.8;
+    }
+    .interest-btn:hover {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="dashboard-sidebar">
+      <div class="sidebar-logo">
+        <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <span class="logo-icon-wrap">
+            <svg class="brand-icon-svg" viewBox="0 0 24 24" fill="none"><path d="M16.5 13C17.6 13 18.5 12.1 18.5 11C18.5 9.9 17.6 9 16.5 9C15.4 9 14.5 9.9 14.5 11C14.5 12.1 15.4 13 16.5 13ZM16.5 14.5C15.17 14.5 12.5 15.17 12.5 16.5V17.5H20.5V16.5C20.5 15.17 17.83 14.5 16.5 14.5Z" fill="#1976F3"/></svg>
+          </span>
+          <span class="logo-title">MiniSocial</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"><span class="nav-label">Home</span></a></li>
+          <li class="nav-item"><a href="{% url 'explore' %}" class="nav-link active"><span class="nav-label">Explore</span></a></li>
+          <li class="nav-item"><a href="{% url 'circles' %}" class="nav-link"><span class="nav-label">Circles</span></a></li>
+          <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><span class="nav-label">Dashboard</span></a></li>
+          <li class="nav-item"><a href="{% url 'notifications' %}" class="nav-link"><span class="nav-label">Notifications</span></a></li>
+          <li class="nav-item"><a href="{% url 'messages' %}" class="nav-link"><span class="nav-label">Messages</span></a></li>
+          <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link"><span class="nav-label">Profile</span></a></li>
+          <li class="nav-item"><a href="{% url 'settings' %}" class="nav-link"><span class="nav-label">Settings</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="{% url 'logout' %}" class="nav-link logout-link"><span class="nav-label">Logout</span></a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <form action="{% url 'search' %}" method="GET" class="search-box-wrap" style="display: flex; width: 100%; max-width: 400px;">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <input type="text" name="q" class="search-input" placeholder="Search topics, posts, users..." aria-label="Search">
+        </form>
+
+        <div class="topbar-user-area">
+          <a href="{% url 'profile' %}" class="user-chip" style="text-decoration: none; color: inherit;">
+            <span class="user-name">@{{ request.user.username }}</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="feed-viewport">
+        <div class="explore-container">
+          
+          <div style="margin-bottom: 24px;">
+            <h1 style="font-size: 22px; font-weight: 700; color: #0F172A; margin: 0 0 4px 0;">Explore & Topics</h1>
+            <p style="font-size: 13px; color: #64748B; margin: 0;">Select topics you love to personalize your discovery feed.</p>
+          </div>
+
+          <!-- Topics Pill List -->
+          <div class="topic-pill-box">
+            <a href="{% url 'explore' %}" class="topic-btn {% if not selected_topic %}selected{% endif %}">
+              All Discussions
+            </a>
+            {% for t in topics %}
+            <div style="display: inline-flex; align-items: center; background: #F1F5F9; border-radius: 20px; padding: 2px 8px 2px 12px; border: 1px solid {% if selected_topic == t.name %}#1976F3{% else %}#E2E8F0{% endif %};">
+              <a href="{% url 'explore' %}?topic={{ t.name }}" style="font-size: 13px; color: #0F172A; text-decoration: none; font-weight: 500;">
+                #{{ t.name }} <span style="font-size: 11px; color: #64748B;">({{ t.posts_count }})</span>
+              </a>
+              <button 
+                type="button" 
+                class="interest-btn" 
+                title="Toggle Interest"
+                onclick="toggleInterest('{{ t.name }}', this)"
+                style="margin-left: 6px; font-size: 13px;"
+              >
+                {% if t.id in user_interest_ids %}⭐{% else %}☆{% endif %}
+              </button>
+            </div>
+            {% empty %}
+            <span style="font-size: 13px; color: #64748B;">No topics created yet. Tag posts with hashtags like #Django or #Python to generate topics!</span>
+            {% endfor %}
+          </div>
+
+          <!-- Stream of Posts matching Selected Topic or User Interests -->
+          <div class="posts-stream">
+            {% for post in posts %}
+            <article class="post-card" id="post-{{ post.id }}">
+              <div class="post-header">
+                <div class="post-author-box">
+                  <a href="{% if post.author == request.user %}{% url 'profile' %}{% else %}{% url 'user_profile' post.author.username %}{% endif %}" class="post-avatar-link">
+                    <div class="post-avatar">
+                      {% if post.author.profile.picture_url %}
+                      <img src="{{ post.author.profile.picture_url }}" alt="{{ post.author.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                      {% else %}
+                      <svg class="avatar-svg" viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="{{ post.author.profile.avatar_color|default:'#1976F3' }}"/><circle cx="16" cy="12" r="6" fill="#FEEAA1"/></svg>
+                      {% endif %}
+                    </div>
+                  </a>
+                  <div class="post-meta">
+                    <span class="author-name">{{ post.author.username }}</span>
+                    <span class="post-time">{{ post.created_at|date:"M d, H:i" }}</span>
+                  </div>
+                </div>
+
+                {% if post.mood %}
+                <span style="font-size: 11.5px; background: #EEF2FF; color: #4F46E5; font-weight: 600; padding: 3px 8px; border-radius: 12px;">{{ post.mood }}</span>
+                {% endif %}
+              </div>
+
+              <div class="post-content-body">
+                <p class="post-text">{{ post.content }}</p>
+                {% if post.image %}
+                <div class="post-image-box">
+                  <img src="{{ post.image.url }}" alt="Post image" class="post-img">
+                </div>
+                {% endif %}
+              </div>
+
+              <!-- Post Topics Tags -->
+              {% if post.post_topics.all %}
+              <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-top: 10px;">
+                {% for pt in post.post_topics.all %}
+                <a href="{% url 'explore' %}?topic={{ pt.topic.name }}" style="font-size: 11.5px; color: #1976F3; text-decoration: none; font-weight: 600;">#{{ pt.topic.name }}</a>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <div class="post-metrics-bar">
+                <span class="metric-item">{{ post.like_count }} Like{{ post.like_count|pluralize }}</span>
+                <span class="metric-item">{{ post.comment_count }} Comment{{ post.comment_count|pluralize }}</span>
+              </div>
+            </article>
+            {% empty %}
+            <div class="empty-state-box" style="background:#fff; border:1px dashed #CBD5E1; border-radius:12px; padding:40px 20px; text-align:center; color:#64748B;">
+              <h3>No Posts Found</h3>
+              <p>Try exploring another topic or share a post with your favorite hashtag!</p>
+            </div>
+            {% endfor %}
+          </div>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    async function toggleInterest(topicName, btn) {
+      try {
+        const res = await fetch('/interests/update/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{ csrf_token }}',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          body: JSON.stringify({ topic: topicName, action: 'toggle' })
+        });
+        const data = await res.json();
+        if (data.success) {
+          btn.textContent = data.is_interested ? '⭐' : '☆';
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>

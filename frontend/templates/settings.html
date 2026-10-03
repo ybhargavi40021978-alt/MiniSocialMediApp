@@ -1,0 +1,407 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Settings</title>
+  <meta name="description" content="Manage your MiniSocial account and profile settings.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/settings.css' %}">
+  <link rel="stylesheet" href="{% static 'css/new-features.css' %}">
+</head>
+<body>
+
+  <div class="settings-layout">
+    
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <aside class="sidebar" id="dashboard-sidebar">
+      
+      <div class="sidebar-logo">
+        <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <span class="logo-icon-wrap" aria-hidden="true">
+            <svg class="brand-icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.5 13C17.6 13 18.5 12.1 18.5 11C18.5 9.9 17.6 9 16.5 9C15.4 9 14.5 9.9 14.5 11C14.5 12.1 15.4 13 16.5 13ZM16.5 14.5C15.17 14.5 12.5 15.17 12.5 16.5V17.5H20.5V16.5C20.5 15.17 17.83 14.5 16.5 14.5Z" fill="#1976F3"/>
+              <path d="M7.5 13C8.6 13 9.5 12.1 9.5 11C9.5 9.9 8.6 9 7.5 9C6.4 9 5.5 9.9 5.5 11C5.5 12.1 6.4 13 7.5 13ZM7.5 14.5C6.17 14.5 3.5 15.17 3.5 16.5V17.5H11.5V16.5C11.5 15.17 8.83 14.5 7.5 14.5Z" fill="#1976F3" opacity="0.85"/>
+              <path d="M12 11.5C13.1 11.5 14 10.6 14 9.5C14 8.4 13.1 7.5 12 7.5C10.9 7.5 10 8.4 10 9.5C10 10.6 10.9 11.5 12 11.5ZM12 13C10.33 13 7 13.84 7 15.5V17H17V15.5C17 13.84 13.67 13 12 13Z" fill="#1976F3"/>
+            </svg>
+          </span>
+          <span class="logo-title">MiniSocial</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav" aria-label="Main Navigation">
+        <ul class="nav-list">
+          <li class="nav-item">
+            <a href="{% url 'home' %}" class="nav-link" id="nav-item-home">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </span>
+              <span class="nav-label">Home</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'explore' %}" class="nav-link" id="nav-item-explore">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+                </svg>
+              </span>
+              <span class="nav-label">Explore</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'circles' %}" class="nav-link" id="nav-item-circles">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </span>
+              <span class="nav-label">Circles</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'dashboard' %}" class="nav-link" id="nav-item-dashboard">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="3" width="7" height="9"/>
+                  <rect x="14" y="3" width="7" height="5"/>
+                  <rect x="14" y="12" width="7" height="9"/>
+                  <rect x="3" y="16" width="7" height="5"/>
+                </svg>
+              </span>
+              <span class="nav-label">Dashboard</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'notifications' %}" class="nav-link" id="nav-item-notifications">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                  <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+              </span>
+              <span class="nav-label">Notifications</span>
+              {% if unread_notifications_count > 0 %}
+              <span class="notif-badge" id="sidebar-notif-badge">{{ unread_notifications_count }}</span>
+              {% endif %}
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'messages' %}" class="nav-link" id="nav-item-messages">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+              </span>
+              <span class="nav-label">Messages</span>
+              {% if unread_messages_count > 0 %}
+              <span class="notif-badge" id="sidebar-messages-badge">{{ unread_messages_count }}</span>
+              {% endif %}
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'profile' %}" class="nav-link" id="nav-item-profile">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+              </span>
+              <span class="nav-label">Profile</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="{% url 'settings' %}" class="nav-link active" id="nav-item-settings">
+              <span class="nav-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                </svg>
+              </span>
+              <span class="nav-label">Settings</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="{% url 'logout' %}" class="nav-link logout-link" id="nav-item-logout">
+          <span class="nav-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+              <polyline points="16 17 21 12 16 7"/>
+              <line x1="21" y1="12" x2="9" y2="12"/>
+            </svg>
+          </span>
+          <span class="nav-label">Logout</span>
+        </a>
+      </div>
+
+    </aside>
+
+    <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+    <div class="main-wrapper">
+      
+      <header class="topbar">
+        <form action="{% url 'search' %}" method="GET" class="search-box-wrap" style="display: flex; align-items: center; width: 100%; max-width: 480px;">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+          </span>
+          <input 
+            type="text" 
+            name="q"
+            class="search-input" 
+            placeholder="Search users, circles, topics..." 
+            aria-label="Search"
+          >
+        </form>
+
+        <div class="topbar-user-area">
+          <a href="{% url 'notifications' %}" class="topbar-icon-btn" aria-label="Notifications" title="Notifications" style="text-decoration: none;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+            </svg>
+          </a>
+
+          <a href="{% url 'profile' %}" class="user-chip" id="topbar-user-menu" style="text-decoration: none; color: inherit;">
+            <div class="user-avatar-wrap">
+              {% if current_user.profile.picture_url %}
+              <img src="{{ current_user.profile.picture_url }}" alt="{{ current_user.username }}" class="avatar-img" id="topbar-avatar-img">
+              {% else %}
+              <svg class="avatar-svg" id="topbar-avatar-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="16" cy="16" r="16" fill="{{ current_user.profile.avatar_color|default:'#6366F1' }}"/>
+                <circle cx="16" cy="12" r="6" fill="#FEEAA1"/>
+                <path d="M11 11C11 7 21 7 21 11C21 12 19 12 18 10C17 9 15 9 14 10C13 12 11 12 11 11Z" fill="#3D405B"/>
+                <path d="M8 26C8 21 12 19 16 19C20 19 24 21 24 26H8Z" fill="{{ current_user.profile.avatar_color|default:'#818CF8' }}"/>
+              </svg>
+              {% endif %}
+            </div>
+            <span class="user-name">{{ current_user.username }}</span>
+          </a>
+        </div>
+      </header>
+
+      <main class="settings-viewport">
+        <div class="settings-card" id="settings-card">
+          
+          <div class="settings-title-row">
+            <h1 class="settings-title">Settings</h1>
+            <span style="font-size: 11.5px; color: var(--text-muted);">@{{ current_user.username }}</span>
+          </div>
+
+          <!-- ==================== 1. PROFILE SETTINGS ==================== -->
+          <section class="settings-section" id="profile-settings-section">
+            <h2 class="section-subtitle">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+              </svg>
+              Profile Settings
+            </h2>
+
+            <!-- Profile Picture Uploader -->
+            <div class="profile-photo-row">
+              <div class="photo-preview-wrap" id="settings-photo-preview">
+                {% if profile.picture_url %}
+                <img src="{{ profile.picture_url }}" alt="Profile photo" class="avatar-img" id="settings-avatar-img">
+                {% else %}
+                <svg class="avatar-svg" id="settings-avatar-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="16" cy="16" r="16" fill="{{ profile.avatar_color|default:'#1976F3' }}"/>
+                  <circle cx="16" cy="12" r="6" fill="#FEEAA1"/>
+                  <path d="M11 11C11 7 21 7 21 11C21 12 19 12 18 10C17 9 15 9 14 10C13 12 11 12 11 11Z" fill="#3D405B"/>
+                  <path d="M8 26C8 21 12 19 16 19C20 19 24 21 24 26H8Z" fill="{{ profile.avatar_color|default:'#818CF8' }}"/>
+                </svg>
+                {% endif %}
+              </div>
+              <div class="photo-info">
+                <span class="photo-title">Profile Picture</span>
+                <span class="photo-desc">Upload a photo to represent you across MiniSocial.</span>
+                <label for="settings-photo-file" class="btn-upload-photo" id="btn-choose-photo">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    <circle cx="12" cy="13" r="4"/>
+                  </svg>
+                  <span>Change Photo</span>
+                </label>
+                <input type="file" id="settings-photo-file" accept="image/jpeg, image/png, image/webp" style="display: none;">
+              </div>
+            </div>
+
+            <!-- Profile Info Form -->
+            <form id="profile-info-form">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="form-label" for="settings-bio-input">Bio</label>
+                <textarea id="settings-bio-input" class="form-textarea" placeholder="Write a short bio about yourself...">{{ profile.bio }}</textarea>
+              </div>
+
+              <div class="form-group" style="margin-top: 10px;">
+                <label class="form-label" for="settings-color-input">Avatar Accent Color</label>
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <input type="color" id="settings-color-input" value="{{ profile.avatar_color|default:'#1976F3' }}" style="width: 36px; height: 36px; border: 1px solid var(--border-light); border-radius: 6px; cursor: pointer; padding: 2px;">
+                  <span style="font-size: 11.5px; color: var(--text-gray);">Used as fallback avatar background color</span>
+                </div>
+              </div>
+
+              <div id="profile-status-alert" class="status-alert" style="margin-top: 10px;"></div>
+
+              <button type="submit" class="btn-primary" id="btn-save-profile" style="margin-top: 12px;">
+                Save Profile
+              </button>
+            </form>
+          </section>
+
+          <div class="divider"></div>
+
+          <!-- ==================== FEED PREFERENCES ==================== -->
+          <section class="settings-section" id="feed-preferences-section">
+            <h2 class="section-subtitle">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+              Feed Preferences
+            </h2>
+
+            <form id="feed-preferences-form">
+              {% csrf_token %}
+
+              <!-- Clean Feed Toggle -->
+              <div class="pref-row" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-light, #E2E8F0);">
+                <div>
+                  <strong style="font-size: 13.5px; color: var(--text-dark, #1E293B); display: block;">Clean Feed Mode</strong>
+                  <span style="font-size: 12px; color: var(--text-muted, #64748B);">Focus purely on content by hiding like counts, follower metrics, and vanity statistics.</span>
+                </div>
+                <label class="switch-toggle" style="position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0;">
+                  <input type="checkbox" id="pref-clean-feed" name="clean_feed" {% if preference.clean_feed %}checked{% endif %}>
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+
+              <!-- Preferred Mood Selection -->
+              <div class="pref-row" style="padding: 12px 0; border-bottom: 1px solid var(--border-light, #E2E8F0);">
+                <label class="form-label" for="pref-preferred-mood" style="font-size: 13px; font-weight: 600; color: var(--text-dark, #1E293B);">Preferred Mood Filter</label>
+                <p style="font-size: 12px; color: var(--text-muted, #64748B); margin-bottom: 8px;">Default mood used to prioritize relevant posts in your home feed.</p>
+                <select id="pref-preferred-mood" name="preferred_mood" class="form-input" style="max-width: 280px; padding: 8px 12px; border-radius: 8px; border: 1px solid #CBD5E1;">
+                  <option value="" {% if not preference.preferred_mood %}selected{% endif %}>No default (All moods)</option>
+                  <option value="Happy" {% if preference.preferred_mood == "Happy" %}selected{% endif %}>😊 Happy</option>
+                  <option value="Motivated" {% if preference.preferred_mood == "Motivated" %}selected{% endif %}>🔥 Motivated</option>
+                  <option value="Relaxed" {% if preference.preferred_mood == "Relaxed" %}selected{% endif %}>🧘 Relaxed</option>
+                  <option value="Focused" {% if preference.preferred_mood == "Focused" %}selected{% endif %}>💻 Focused</option>
+                  <option value="Learning" {% if preference.preferred_mood == "Learning" %}selected{% endif %}>🌱 Learning</option>
+                  <option value="Creative" {% if preference.preferred_mood == "Creative" %}selected{% endif %}>🎨 Creative</option>
+                  <option value="Quiet" {% if preference.preferred_mood == "Quiet" %}selected{% endif %}>😌 Quiet</option>
+                </select>
+              </div>
+
+              <!-- Show Expired Posts in Archive -->
+              <div class="pref-row" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border-light, #E2E8F0);">
+                <div>
+                  <strong style="font-size: 13.5px; color: var(--text-dark, #1E293B); display: block;">Show Expired Posts (Personal Archive)</strong>
+                  <span style="font-size: 12px; color: var(--text-muted, #64748B);">Keep your own expired posts accessible in your profile view instead of hiding them.</span>
+                </div>
+                <label class="switch-toggle" style="position: relative; display: inline-block; width: 44px; height: 24px; flex-shrink: 0;">
+                  <input type="checkbox" id="pref-show-expired" name="show_expired_posts" {% if preference.show_expired_posts %}checked{% endif %}>
+                  <span class="switch-slider"></span>
+                </label>
+              </div>
+
+              <!-- Interest Preferences Link -->
+              <div class="pref-row" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 0;">
+                <div>
+                  <strong style="font-size: 13.5px; color: var(--text-dark, #1E293B); display: block;">Topics & Interests</strong>
+                  <span style="font-size: 12px; color: var(--text-muted, #64748B);">Curate topics like #Python, #Django, #Tech to tailor your discovery feed.</span>
+                </div>
+                <a href="{% url 'explore' %}" class="btn-primary" style="text-decoration: none; font-size: 12px; padding: 6px 14px; background: #EEF2F6; color: #1E293B; border: 1px solid #CBD5E1;">
+                  Manage Interests →
+                </a>
+              </div>
+
+              <div id="pref-status-alert" class="status-alert" style="margin-top: 10px; display: none;"></div>
+
+              <button type="submit" class="btn-primary" id="btn-save-preferences" style="margin-top: 12px;">
+                Save Feed Preferences
+              </button>
+            </form>
+          </section>
+
+          <div class="divider"></div>
+
+          <!-- ==================== 2. ACCOUNT & SECURITY ==================== -->
+          <section class="settings-section" id="account-settings-section">
+            <h2 class="section-subtitle">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              Account & Password
+            </h2>
+
+            <form id="password-change-form">
+              {% csrf_token %}
+              <div class="form-group">
+                <label class="form-label" for="input-current-password">Current Password</label>
+                <input type="password" id="input-current-password" class="form-input" placeholder="Enter current password" autocomplete="current-password" required>
+              </div>
+
+              <div class="form-group" style="margin-top: 8px;">
+                <label class="form-label" for="input-new-password">New Password</label>
+                <input type="password" id="input-new-password" class="form-input" placeholder="Enter new password (min. 4 characters)" autocomplete="new-password" required>
+              </div>
+
+              <div class="form-group" style="margin-top: 8px;">
+                <label class="form-label" for="input-confirm-password">Confirm New Password</label>
+                <input type="password" id="input-confirm-password" class="form-input" placeholder="Confirm new password" autocomplete="new-password" required>
+              </div>
+
+              <div id="password-status-alert" class="status-alert" style="margin-top: 10px;"></div>
+
+              <button type="submit" class="btn-primary" id="btn-change-password-submit" style="margin-top: 12px;">
+                Change Password
+              </button>
+            </form>
+          </section>
+
+          <div class="divider"></div>
+
+          <!-- Session Actions -->
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 4px;">
+            <span style="font-size: 11.5px; color: var(--text-gray);">Need to sign out of your account?</span>
+            <a href="{% url 'logout' %}" class="btn-primary" style="background-color: #EF4444; text-decoration: none; font-size: 11.5px; padding: 6px 14px;">
+              Log Out
+            </a>
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+  </div>
+
+  <script src="{% static 'js/settings.js' %}"></script>
+</body>
+</html>

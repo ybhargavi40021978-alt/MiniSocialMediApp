@@ -1,0 +1,188 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Post #{{ post.id }} by {{ post.author.username }}</title>
+  <meta name="description" content="View post details and discussion on MiniSocial.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/post-detail.css' %}">
+</head>
+<body>
+
+  <!-- Centered Card Page Layout -->
+  <main class="page-viewport-wrapper">
+    <div class="post-detail-card" id="post-detail-card">
+      
+      <!-- ==================== 1. TOP HEADER / BACK NAVIGATION ==================== -->
+      <header class="detail-header-bar">
+        <a href="{% url 'home' %}" class="back-nav-btn" id="btn-back-feed" aria-label="Go back to Home Feed">
+          <svg class="back-arrow-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <line x1="19" y1="12" x2="5" y2="12"/>
+            <polyline points="12 19 5 12 12 5"/>
+          </svg>
+          <span class="back-label">Post</span>
+        </a>
+      </header>
+
+      <!-- ==================== 2. POST CARD CONTENT ==================== -->
+      <div class="post-inner-body">
+        
+        <!-- Post Header -->
+        <div class="post-author-header">
+          <div class="author-meta-group">
+            <a href="{% if post.author == request.user %}{% url 'profile' %}{% else %}{% url 'user_profile' post.author.username %}{% endif %}" style="text-decoration: none;">
+              <div class="author-avatar" aria-hidden="true" style="overflow: hidden; border-radius: 50%;">
+                {% if post.author.profile.picture_url %}
+                <img src="{{ post.author.profile.picture_url }}" alt="{{ post.author.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+                {% else %}
+                <svg class="avatar-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="16" cy="16" r="16" fill="{{ post.author.profile.avatar_color|default:'#EC4899' }}"/>
+                  <circle cx="16" cy="12" r="6" fill="#FCE0C6"/>
+                  <path d="M10 11C10 6 22 6 22 11C22 13 20 12 18 10C16 9 14 9 12 10C10 12 10 13 10 11Z" fill="#5A3E2B"/>
+                  <path d="M8 26C8 21 12 19 16 19C20 19 24 21 24 26H8Z" fill="{{ post.author.profile.avatar_color|default:'#EC4899' }}"/>
+                </svg>
+                {% endif %}
+              </div>
+            </a>
+            <div class="author-info">
+              <a href="{% if post.author == request.user %}{% url 'profile' %}{% else %}{% url 'user_profile' post.author.username %}{% endif %}" class="author-name" style="text-decoration: none; color: inherit;">
+                {{ post.author.username }}
+              </a>
+              <span class="author-subtext">@{{ post.author.username }} • {{ post.created_at|timesince }} ago</span>
+            </div>
+          </div>
+
+          <!-- Three-Dot Menu -->
+          <div class="post-options-wrap">
+            <button type="button" class="post-options-btn" id="btn-post-options" aria-label="Post options">
+              •••
+            </button>
+          </div>
+        </div>
+
+        <!-- Post Text -->
+        <div class="post-content-wrap">
+          <p class="post-text-content" id="main-post-text">{{ post.content }}</p>
+        </div>
+
+        <!-- Post Image -->
+        {% if post.image %}
+        <div class="post-media-box" style="margin: 10px 0; border-radius: 6px; overflow: hidden; max-height: 220px;">
+          <img src="{{ post.image.url }}" alt="Post image" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        {% endif %}
+
+        <!-- Statistics -->
+        <div class="post-metrics-row">
+          <span class="metric-likes"><strong id="metric-likes-count">{{ post.like_count }}</strong> Likes</span>
+          <span class="metric-comments"><strong id="metric-comments-count">{{ post.comment_count }}</strong> Comments</span>
+        </div>
+
+        <!-- Action Row -->
+        <div class="post-actions-toolbar">
+          <button 
+            type="button" 
+            class="action-item-btn btn-like-action {% if is_liked %}liked{% endif %}" 
+            id="btn-like-detail" 
+            data-post-id="{{ post.id }}"
+            data-liked="{% if is_liked %}true{% else %}false{% endif %}"
+          >
+            <span class="action-icon">
+              <svg viewBox="0 0 24 24" fill="{% if is_liked %}#FF4D67{% else %}none{% endif %}" stroke="{% if is_liked %}#FF4D67{% else %}currentColor{% endif %}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </span>
+            <span class="action-label" id="detail-like-text">{% if is_liked %}Liked{% else %}Like{% endif %}</span>
+          </button>
+
+          <button type="button" class="action-item-btn" id="btn-focus-comment">
+            <span class="action-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </span>
+            <span class="action-label">Comment</span>
+          </button>
+
+          <button type="button" class="action-item-btn" onclick="navigator.clipboard.writeText(window.location.href); alert('Post link copied to clipboard!');">
+            <span class="action-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/>
+                <polyline points="16 6 12 2 8 6"/>
+                <line x1="12" y1="2" x2="12" y2="15"/>
+              </svg>
+            </span>
+            <span class="action-label">Share</span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- ==================== 3. COMMENTS LIST SECTION ==================== -->
+      <section class="comments-section" aria-label="Comments stream">
+        <div class="comments-stream-container" id="comments-stream-container">
+          {% for comment in comments %}
+          <div class="comment-item" id="comment-{{ comment.id }}">
+            <div class="comment-avatar-wrap" style="overflow: hidden; border-radius: 50%;">
+              {% if comment.author.profile.picture_url %}
+              <img src="{{ comment.author.profile.picture_url }}" alt="{{ comment.author.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+              {% else %}
+              <svg class="avatar-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="12" fill="{{ comment.author.profile.avatar_color|default:'#1976F3' }}"/>
+                <circle cx="12" cy="9" r="4.5" fill="#FCD5B5"/>
+                <path d="M8 8C8 5 16 5 16 8C16 9 14.5 7 12 7C9.5 7 8 9 8 8Z" fill="#1E293B"/>
+                <path d="M6 20C6 16 9 14.5 12 14.5C15 14.5 18 16 18 20H6Z" fill="{{ comment.author.profile.avatar_color|default:'#1976F3' }}"/>
+              </svg>
+              {% endif %}
+            </div>
+            <div class="comment-content-box">
+              <div class="comment-header-row">
+                <a href="{% url 'user_profile' comment.author.username %}" class="comment-author" style="text-decoration: none; color: inherit;">
+                  {{ comment.author.username }}
+                </a>
+                <span class="comment-timestamp">{{ comment.created_at|timesince }} ago</span>
+              </div>
+              <p class="comment-text-body">{{ comment.content }}</p>
+            </div>
+          </div>
+          {% empty %}
+          <div id="no-comments-msg" style="text-align: center; padding: 20px 10px; color: #94A3B8; font-size: 11px;">
+            No comments yet. Start the conversation!
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- ==================== 4. WRITE COMMENT INPUT BOX ==================== -->
+      <div class="comment-composer-area">
+        <form id="comment-composer-form" method="POST" action="{% url 'comment_post' post.id %}">
+          {% csrf_token %}
+          <div class="composer-flex-row">
+            <input 
+              type="text" 
+              id="comment-input-field" 
+              name="content"
+              class="comment-input-field" 
+              placeholder="Write a comment..." 
+              autocomplete="off"
+            >
+            <button type="submit" class="btn-send-comment" id="btn-post-comment">
+              Reply
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <script src="{% static 'js/post-detail.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — {{ profile_user.username }} Profile</title>
+  <meta name="description" content="View {{ profile_user.username }}'s profile on MiniSocial.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+
+  <!-- Centered Main Viewport Container -->
+  <main class="profile-page-wrapper">
+    <div class="profile-card-container" id="user-profile-card">
+      
+      <!-- ==================== 1. COVER IMAGE ==================== -->
+      <div class="cover-image-box">
+        <svg class="cover-svg" viewBox="0 0 1000 130" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="sunset-sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#312E81"/>
+              <stop offset="35%" stop-color="#6366F1"/>
+              <stop offset="65%" stop-color="#F43F5E"/>
+              <stop offset="90%" stop-color="#FB923C"/>
+              <stop offset="100%" stop-color="#FDE047"/>
+            </linearGradient>
+            <linearGradient id="mtn-back" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4338CA" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#1E1B4B" stop-opacity="0.95"/>
+            </linearGradient>
+            <linearGradient id="mtn-front" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1E1B4B"/>
+              <stop offset="100%" stop-color="#0F172A"/>
+            </linearGradient>
+          </defs>
+
+          <!-- Sky Background -->
+          <rect width="1000" height="130" fill="url(#sunset-sky)"/>
+          <circle cx="500" cy="85" r="28" fill="#FFF7ED" opacity="0.9"/>
+          <circle cx="500" cy="85" r="45" fill="#FED7AA" opacity="0.35"/>
+          <path d="M0 130 L0 82 L90 52 L220 95 L340 45 L480 88 L620 38 L760 92 L880 48 L1000 78 L1000 130 Z" fill="url(#mtn-back)"/>
+          <path d="M0 130 L0 105 L140 75 L280 115 L430 68 L570 108 L720 62 L860 105 L1000 72 L1000 130 Z" fill="url(#mtn-front)"/>
+        </svg>
+
+        <!-- Top Navigation Overlay Links -->
+        <div style="position: absolute; top: 10px; left: 12px; display: flex; gap: 6px; flex-wrap: wrap;">
+          <a href="{% url 'home' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; backdrop-filter: blur(4px);">
+            ← Feed
+          </a>
+          {% if is_owner %}
+          <a href="{% url 'dashboard' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; backdrop-filter: blur(4px);">
+            Dashboard
+          </a>
+          {% endif %}
+          <a href="{% url 'circles' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; backdrop-filter: blur(4px);">
+            Circles
+          </a>
+          <a href="{% url 'explore' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; backdrop-filter: blur(4px);">
+            Explore
+          </a>
+          <a href="{% url 'settings' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; backdrop-filter: blur(4px);">
+            Settings
+          </a>
+        </div>
+      </div>
+
+      <!-- ==================== 2. PROFILE INFORMATION AREA ==================== -->
+      <div class="profile-info-section">
+        
+        <!-- Left: Avatar (Overlapping Cover) -->
+        <div class="avatar-overlap-wrapper" style="position: relative;">
+          <div class="profile-avatar" id="user-avatar-main" style="position: relative; overflow: visible;">
+            <div style="width: 100%; height: 100%; border-radius: 50%; overflow: hidden;" id="main-avatar-container">
+              {% if profile_user.profile.picture_url %}
+              <img src="{{ profile_user.profile.picture_url }}" alt="{{ profile_user.username }}" class="avatar-img" id="profile-avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+              {% else %}
+              <svg class="avatar-svg" id="profile-avatar-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="40" cy="40" r="40" fill="{{ profile_user.profile.avatar_color|default:'#6366F1' }}"/>
+                <circle cx="40" cy="30" r="16" fill="#FEEAA1"/>
+                <path d="M26 28C26 17 54 17 54 28C54 31 49 31 46 26C42 22 36 22 32 26C29 30 26 31 26 28Z" fill="#3D405B"/>
+                <circle cx="35" cy="30" r="1.8" fill="#3D405B"/>
+                <circle cx="45" cy="30" r="1.8" fill="#3D405B"/>
+                <path d="M37 36Q40 39 43 36" stroke="#E07A5F" stroke-width="1.6" stroke-linecap="round"/>
+                <path d="M20 72C20 58 30 52 40 52C50 52 60 58 60 72H20Z" fill="{{ profile_user.profile.avatar_color|default:'#818CF8' }}"/>
+              </svg>
+              {% endif %}
+            </div>
+
+            <!-- Instant profile picture change button -->
+            <label for="profile-photo-direct-upload" title="Change Profile Picture" style="position: absolute; bottom: 2px; right: 2px; background: #1976F3; color: white; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 2px solid white; box-shadow: 0 1px 3px rgba(0,0,0,0.25);">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </label>
+            <input type="file" id="profile-photo-direct-upload" accept="image/jpeg, image/png, image/webp" style="display: none;">
+          </div>
+        </div>
+
+        <!-- Middle: Username, Handle & Statistics -->
+        <div class="user-details-group">
+          <div class="user-name-row">
+            <h1 class="user-display-name">{{ profile_user.username }}</h1>
+            <span class="user-handle">@{{ profile_user.username }}</span>
+          </div>
+
+          <!-- Statistics: Followers & Following -->
+          <div class="stats-row">
+            <a href="{% url 'followers' %}" class="stat-item" style="text-decoration: none; color: inherit;">
+              <span class="stat-count" id="followers-count">{{ followers_count }}</span>
+              <span class="stat-label">Followers</span>
+            </a>
+            <a href="{% url 'following' %}" class="stat-item" style="text-decoration: none; color: inherit;">
+              <span class="stat-count" id="following-count">{{ following_count }}</span>
+              <span class="stat-label">Following</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Action Buttons -->
+        <div class="follow-action-wrap" style="display: flex; gap: 6px;">
+          <a href="{% url 'settings' %}" class="btn-follow" style="text-decoration: none; text-align: center; line-height: 24px; background: #F1F5F9; color: #1E293B; border: 1px solid #CBD5E1;">
+            Edit Profile
+          </a>
+          <a href="{% url 'home' %}" class="btn-follow" style="text-decoration: none; text-align: center; line-height: 24px;">
+            Feed
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ==================== 3. PROFILE TABS ==================== -->
+      <nav class="profile-tabs-nav" aria-label="Profile navigation">
+        <ul class="tabs-list">
+          <li class="tab-item">
+            <button type="button" class="tab-btn active" data-tab="posts">Posts</button>
+          </li>
+          <li class="tab-item">
+            <button type="button" class="tab-btn" data-tab="about">About</button>
+          </li>
+          <li class="tab-item">
+            <a href="{% url 'followers' %}" class="tab-btn" style="text-decoration: none; display: block; text-align: center;">Followers</a>
+          </li>
+          <li class="tab-item">
+            <a href="{% url 'following' %}" class="tab-btn" style="text-decoration: none; display: block; text-align: center;">Following</a>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ==================== 4. PROFILE CONTENT AREA ==================== -->
+      <div class="profile-content-area">
+        
+        <!-- Posts Stream -->
+        <div class="profile-posts-stream" id="posts-tab-content">
+          {% for post in posts %}
+          <article class="post-card" id="post-{{ post.id }}">
+            <div class="post-header">
+              <div class="post-author-box">
+                <div class="post-avatar" style="overflow: hidden; border-radius: 50%;">
+                  {% if profile_user.profile.picture_url %}
+                  <img src="{{ profile_user.profile.picture_url }}" alt="{{ profile_user.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+                  {% else %}
+                  <svg class="avatar-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="16" cy="16" r="16" fill="{{ profile_user.profile.avatar_color|default:'#6366F1' }}"/>
+                    <circle cx="16" cy="12" r="6" fill="#FEEAA1"/>
+                    <path d="M11 11C11 7 21 7 21 11C21 12 19 12 18 10C17 9 15 9 14 10C13 12 11 12 11 11Z" fill="#3D405B"/>
+                    <path d="M8 26C8 21 12 19 16 19C20 19 24 21 24 26H8Z" fill="{{ profile_user.profile.avatar_color|default:'#818CF8' }}"/>
+                  </svg>
+                  {% endif %}
+                </div>
+                <div class="author-meta">
+                  <span class="author-username">{{ profile_user.username }}</span>
+                  <span class="post-time">{{ post.created_at|timesince }} ago</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="post-body">
+              <a href="{% url 'post_detail' post.id %}" style="text-decoration: none; color: inherit;">
+                <p class="post-text">{{ post.content }}</p>
+              </a>
+              {% if post.image %}
+              <div class="post-media-wrap" style="margin-top: 8px; border-radius: 6px; overflow: hidden; max-height: 200px;">
+                <img src="{{ post.image.url }}" alt="Post image" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="post-metadata">
+              <span class="stat-likes-count"><span class="like-number">{{ post.like_count }}</span> Likes</span>
+              <span class="stat-comments-count"><span class="comment-number">{{ post.comment_count }}</span> Comments</span>
+            </div>
+
+            <div class="post-actions-bar">
+              <button 
+                type="button" 
+                class="action-btn action-like-btn {% if post.is_liked %}active{% endif %}"
+                data-post-id="{{ post.id }}"
+                data-liked="{% if post.is_liked %}true{% else %}false{% endif %}"
+              >
+                <span class="action-icon heart-icon">
+                  <svg viewBox="0 0 24 24" fill="{% if post.is_liked %}#FF4D67{% else %}none{% endif %}" stroke="{% if post.is_liked %}#FF4D67{% else %}currentColor{% endif %}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                </span>
+                <span class="action-text">{% if post.is_liked %}Liked{% else %}Like{% endif %}</span>
+              </button>
+
+              <a href="{% url 'post_detail' post.id %}" class="action-btn" style="text-decoration: none; color: inherit;">
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
+                </span>
+                <span class="action-text">Comment</span>
+              </a>
+            </div>
+          </article>
+          {% empty %}
+          <div style="text-align: center; padding: 30px 10px; color: #64748B; font-size: 12px;">
+            You have not posted anything yet.
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- About Tab Content -->
+        <div class="profile-about-content" id="about-tab-content" style="display: none; padding: 16px;">
+          <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Bio</h3>
+          <p id="profile-bio-text" style="font-size: 12px; color: #475569; line-height: 1.4;">{{ profile_user.profile.bio|default:"No bio provided yet." }}</p>
+          <div style="margin-top: 14px;">
+            <a href="{% url 'settings' %}" style="font-size: 11px; font-weight: 600; color: #1976F3; text-decoration: none;">
+              Edit profile in Settings →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="{% static 'js/profile.js' %}"></script>
+</body>
+</html>

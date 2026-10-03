@@ -1,0 +1,182 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Follow / Unfollow UI State</title>
+  <meta name="description" content="MiniSocial demonstration of Follow and Following profile UI states side by side.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/follow-unfollow.css' %}">
+</head>
+<body>
+
+  <!-- Main Centered Comparison Wrapper -->
+  <main class="page-container">
+    <div style="position: fixed; top: 12px; left: 16px;">
+      <a href="{% url 'home' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 4px; backdrop-filter: blur(4px);">
+        ← Feed
+      </a>
+    </div>
+
+    <div class="cards-comparison-grid">
+
+      <!-- ==================== LEFT CARD: FOLLOW STATE ==================== -->
+      <article class="profile-card" id="card-follow-state">
+        
+        <div class="profile-header-area">
+          <div class="profile-avatar-wrap">
+            <svg class="avatar-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="21" cy="21" r="21" fill="#EC4899"/>
+              <circle cx="21" cy="15" r="8" fill="#FCE0C6"/>
+              <path d="M13 14C13 8 29 8 29 14C29 17 26 15 23 13C21 11 18 11 16 13C13 15 13 17 13 14Z" fill="#5A3E2B"/>
+              <circle cx="18" cy="16" r="1" fill="#5A3E2B"/>
+              <circle cx="24" cy="16" r="1" fill="#5A3E2B"/>
+              <path d="M19 19Q21 21 23 19" stroke="#E07A5F" stroke-width="0.9" stroke-linecap="round"/>
+              <path d="M10 38C10 28 15 25 21 25C27 25 32 28 32 38H10Z" fill="#F472B6"/>
+            </svg>
+          </div>
+
+          <h2 class="profile-name">priya</h2>
+          <span class="profile-handle">@priya</span>
+
+          <div class="profile-stats">
+            <div class="stat-item">
+              <span class="stat-number followers-count">8</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">5</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </div>
+
+          <div class="follow-btn-wrap">
+            <button 
+              type="button" 
+              class="btn-follow follow" 
+              id="btn-follow-left" 
+              data-following="false" 
+              aria-label="Follow Priya"
+            >
+              Follow
+            </button>
+          </div>
+        </div>
+
+        <nav class="card-tabs-nav" aria-label="Profile tabs">
+          <ul class="tabs-list">
+            <li class="tab-item">
+              <button type="button" class="tab-btn active">Posts</button>
+            </li>
+            <li class="tab-item">
+              <button type="button" class="tab-btn">About</button>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="post-preview-card">
+          <div class="preview-header">
+            <div class="preview-avatar-wrap" aria-hidden="true">
+              <svg class="avatar-svg" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="8" r="8" fill="#EC4899"/>
+                <circle cx="8" cy="6" r="3.2" fill="#FCE0C6"/>
+                <path d="M5 5C5 3 11 3 11 5C11 6 10 5.5 9 5C8 4.5 7 4.5 6 5C5 5.5 5 6 5 5Z" fill="#5A3E2B"/>
+                <path d="M4 15C4 11 6 10 8 10C10 10 12 11 12 15H4Z" fill="#F472B6"/>
+              </svg>
+            </div>
+            <div class="preview-meta">
+              <span class="preview-author">priya</span>
+              <span class="preview-time">4 hours ago</span>
+            </div>
+          </div>
+          <p class="preview-text">Good vibes only! ✨</p>
+        </div>
+
+      </article>
+
+      <!-- ==================== RIGHT CARD: FOLLOWING STATE ==================== -->
+      <article class="profile-card" id="card-following-state">
+        
+        <div class="profile-header-area">
+          <div class="profile-avatar-wrap">
+            <svg class="avatar-svg" viewBox="0 0 42 42" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="21" cy="21" r="21" fill="#EC4899"/>
+              <circle cx="21" cy="15" r="8" fill="#FCE0C6"/>
+              <path d="M13 14C13 8 29 8 29 14C29 17 26 15 23 13C21 11 18 11 16 13C13 15 13 17 13 14Z" fill="#5A3E2B"/>
+              <circle cx="18" cy="16" r="1" fill="#5A3E2B"/>
+              <circle cx="24" cy="16" r="1" fill="#5A3E2B"/>
+              <path d="M19 19Q21 21 23 19" stroke="#E07A5F" stroke-width="0.9" stroke-linecap="round"/>
+              <path d="M10 38C10 28 15 25 21 25C27 25 32 28 32 38H10Z" fill="#F472B6"/>
+            </svg>
+          </div>
+
+          <h2 class="profile-name">priya</h2>
+          <span class="profile-handle">@priya</span>
+
+          <div class="profile-stats">
+            <div class="stat-item">
+              <span class="stat-number followers-count">8</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-number">5</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </div>
+
+          <div class="follow-btn-wrap">
+            <button 
+              type="button" 
+              class="btn-follow following" 
+              id="btn-follow-right" 
+              data-following="true" 
+              aria-label="Unfollow Priya"
+            >
+              Following
+            </button>
+          </div>
+        </div>
+
+        <nav class="card-tabs-nav" aria-label="Profile tabs">
+          <ul class="tabs-list">
+            <li class="tab-item">
+              <button type="button" class="tab-btn active">Posts</button>
+            </li>
+            <li class="tab-item">
+              <button type="button" class="tab-btn">About</button>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="post-preview-card">
+          <div class="preview-header">
+            <div class="preview-avatar-wrap" aria-hidden="true">
+              <svg class="avatar-svg" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="8" cy="8" r="8" fill="#EC4899"/>
+                <circle cx="8" cy="6" r="3.2" fill="#FCE0C6"/>
+                <path d="M5 5C5 3 11 3 11 5C11 6 10 5.5 9 5C8 4.5 7 4.5 6 5C5 5.5 5 6 5 5Z" fill="#5A3E2B"/>
+                <path d="M4 15C4 11 6 10 8 10C10 10 12 11 12 15H4Z" fill="#F472B6"/>
+              </svg>
+            </div>
+            <div class="preview-meta">
+              <span class="preview-author">priya</span>
+              <span class="preview-time">4 hours ago</span>
+            </div>
+          </div>
+          <p class="preview-text">Good vibes only! ✨</p>
+        </div>
+
+      </article>
+
+    </div>
+  </main>
+
+  <script src="{% static 'js/follow-unfollow.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,512 @@
+/* ==========================================================================
+   MINISOCIAL — 6. POST DETAIL PAGE
+   Pixel-perfect reproduction of Screen 6 from Reference Image
+   ========================================================================== */
+
+/* --------------------------------------------------
+   1. COLOR PALETTE & DESIGN VARIABLES
+   -------------------------------------------------- */
+:root {
+  --primary-blue: #1976F3;
+  --dark-navy: #14213D;
+  --text-gray: #64748B;
+  --light-gray: #94A3B8;
+  --page-bg: #F7FAFD;
+  --white: #FFFFFF;
+  --border-light: #E2EAF2;
+  --border-subtle: #F1F5F9;
+  --border-input: #DCE6F0;
+
+  --card-width: 580px;
+  --font-family: 'Inter', Arial, sans-serif;
+}
+
+/* --------------------------------------------------
+   2. RESET & BASE
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--page-bg);
+  color: var(--dark-navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------
+   3. CENTERED PAGE CONTAINER
+   -------------------------------------------------- */
+.page-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 16px 50px;
+}
+
+/* --------------------------------------------------
+   4. MAIN POST DETAIL CARD
+   Width: 550px–650px (Desktop target: 580px)
+   -------------------------------------------------- */
+.post-detail-card {
+  width: var(--card-width);
+  max-width: 100%;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 7px;
+  box-shadow: 0 3px 15px rgba(30, 70, 120, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------
+   5. BACK HEADER: ← Post
+   -------------------------------------------------- */
+.card-back-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--white);
+  display: flex;
+  align-items: center;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  text-decoration: none;
+  color: var(--dark-navy);
+  transition: color 0.15s ease;
+}
+
+.back-link:hover {
+  color: var(--primary-blue);
+}
+
+.back-arrow-icon {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.back-arrow-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.back-header-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: inherit;
+  letter-spacing: -0.01em;
+}
+
+/* --------------------------------------------------
+   6. POST INNER BODY
+   -------------------------------------------------- */
+.post-inner-body {
+  padding: 14px 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Post Author Header */
+.post-author-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.author-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.author-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.avatar-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.author-name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--dark-navy);
+}
+
+.post-timestamp {
+  font-size: 8.8px;
+  color: var(--text-gray);
+  margin-top: 1px;
+}
+
+/* Three-dot Options Menu */
+.post-options-wrap {
+  position: relative;
+}
+
+.post-options-btn {
+  background: none;
+  border: none;
+  outline: none;
+  color: var(--light-gray);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 3px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.post-options-btn:hover {
+  color: var(--dark-navy);
+  background-color: #F1F5F9;
+}
+
+.options-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: none;
+  flex-direction: column;
+  min-width: 80px;
+  z-index: 20;
+}
+
+.options-dropdown.show {
+  display: flex;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  outline: none;
+  padding: 6px 10px;
+  font-family: inherit;
+  font-size: 9.5px;
+  text-align: left;
+  color: var(--dark-navy);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background-color: #F1F5F9;
+}
+
+.dropdown-item.btn-delete {
+  color: #DC2626;
+}
+
+.dropdown-item.btn-delete:hover {
+  background-color: #FEF2F2;
+}
+
+/* Post Text Content */
+.post-content-wrap {
+  margin-bottom: 9px;
+}
+
+.post-text-content {
+  font-size: 10.5px;
+  font-weight: 400;
+  color: var(--dark-navy);
+  line-height: 1.45;
+}
+
+/* Post Image: Laptop / Workspace (150px height) */
+.post-media-box {
+  width: 100%;
+  height: 150px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: #E2E8F0;
+  margin-bottom: 9px;
+}
+
+.workspace-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Post Statistics: 5 Likes 2 Comments */
+.post-statistics-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 9.2px;
+  color: var(--text-gray);
+  margin-bottom: 8px;
+  user-select: none;
+}
+
+.stat-number {
+  font-weight: 700;
+  color: var(--dark-navy);
+}
+
+/* Post Action Bar: Like, Comment, Share */
+.post-action-bar {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 8px 0;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 14px;
+}
+
+.post-action-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 500;
+  color: var(--text-gray);
+  padding: 3px 6px;
+  border-radius: 4px;
+  transition: all 0.15s ease;
+}
+
+.post-action-btn:hover {
+  color: var(--primary-blue);
+  background-color: #F8FAFD;
+}
+
+.action-icon {
+  width: 13px;
+  height: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* Active Liked State */
+.action-like-btn.liked {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.action-like-btn.liked .heart-icon svg {
+  fill: var(--primary-blue);
+  stroke: var(--primary-blue);
+}
+
+/* --------------------------------------------------
+   7. COMMENTS SECTION
+   -------------------------------------------------- */
+.comments-section-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.comments-header-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  margin-bottom: 10px;
+}
+
+/* Comments List */
+.comments-list {
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  margin-bottom: 14px;
+}
+
+.comment-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.comment-avatar-box {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.comment-content-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.comment-user-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
+.comment-username {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--dark-navy);
+}
+
+.comment-time {
+  font-size: 8.5px;
+  color: var(--text-gray);
+}
+
+.comment-text {
+  font-size: 10px;
+  color: var(--dark-navy);
+  line-height: 1.4;
+}
+
+/* --------------------------------------------------
+   8. COMMENT INPUT ROW
+   Avatar + Input + Blue Send Button
+   -------------------------------------------------- */
+.comment-input-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.current-user-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.comment-form-inline {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.comment-input-field {
+  flex: 1;
+  height: 30px;
+  background-color: var(--white);
+  border: 1px solid var(--border-input);
+  border-radius: 5px;
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 10px;
+  color: var(--dark-navy);
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.comment-input-field:focus {
+  border-color: var(--primary-blue);
+}
+
+.comment-input-field::placeholder {
+  color: var(--light-gray);
+}
+
+.btn-send-comment {
+  width: 29px;
+  height: 29px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: 4.5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.15s ease;
+}
+
+.btn-send-comment:hover {
+  background-color: #156ADF;
+}
+
+.btn-send-comment svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* --------------------------------------------------
+   9. RESPONSIVE DESIGN
+   -------------------------------------------------- */
+
+/* Tablet (Under 640px) */
+@media (max-width: 640px) {
+  .page-container {
+    padding: 16px 10px 40px;
+  }
+
+  .post-detail-card {
+    width: 100%;
+  }
+
+  .post-media-box {
+    height: 135px;
+  }
+}
+
+/* Mobile (Under 480px) */
+@media (max-width: 480px) {
+  .post-inner-body {
+    padding: 12px 12px 16px;
+  }
+
+  .post-media-box {
+    height: 120px;
+  }
+
+  .post-action-bar {
+    gap: 16px;
+  }
+}

@@ -1,0 +1,570 @@
+/* ==========================================================================
+   MINISOCIAL — 5. USER PROFILE (VIEW ANOTHER USER: sai_kumar)
+   Strict visual reproduction of Screen 5 from Reference Image
+   ========================================================================== */
+
+/* --------------------------------------------------
+   1. COLOR PALETTE & DESIGN VARIABLES
+   -------------------------------------------------- */
+:root {
+  --primary-blue: #1976F3;
+  --dark-navy: #14213D;
+  --text-gray: #64748B;
+  --text-muted: #94A3B8;
+  --light-bg: #F7FAFD;
+  --white: #FFFFFF;
+  --border-light: #E2EAF2;
+  --border-card: #E3ECF5;
+  --border-grid-card: #E1EAF3;
+  --active-blue: #1976F3;
+
+  --font-family: 'Inter', Arial, sans-serif;
+}
+
+/* --------------------------------------------------
+   2. RESET & BASE
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--light-bg);
+  color: var(--dark-navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------
+   3. MAIN WRAPPER
+   -------------------------------------------------- */
+.profile-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px 16px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --------------------------------------------------
+   4. MAIN PROFILE CARD
+   Width: 900px–1000px (Desktop target: 940px)
+   -------------------------------------------------- */
+.profile-card-container {
+  width: 940px;
+  max-width: 92%;
+  background-color: var(--white);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  box-shadow: 0 3px 15px rgba(30, 80, 130, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------
+   5. COVER IMAGE
+   Height: ~115px, Panoramic Mountain & Sunset Landscape
+   -------------------------------------------------- */
+.cover-image-box {
+  width: 100%;
+  height: 115px;
+  overflow: hidden;
+  background-color: #1E3A8A;
+  border-radius: 8px 8px 0 0;
+}
+
+.cover-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --------------------------------------------------
+   6. PROFILE HEADER & USER INFO
+   sai_kumar avatar, name, handle, stats & Follow button
+   -------------------------------------------------- */
+.profile-header-section {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 28px 16px 30px;
+  position: relative;
+  background-color: var(--white);
+}
+
+/* sai_kumar Avatar overlapping cover */
+.avatar-overlap-wrapper {
+  margin-top: -40px;
+  margin-right: 18px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  background-color: var(--primary-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.avatar-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* User Details: Name, Handle, Stats */
+.user-details-group {
+  flex: 1;
+  padding-top: 10px;
+}
+
+.user-name-row {
+  margin-bottom: 8px;
+}
+
+.user-display-name {
+  font-size: 17.5px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.user-handle {
+  font-size: 10.5px;
+  color: var(--text-gray);
+  margin-top: 2px;
+  display: block;
+}
+
+/* Follower Statistics: 12 Followers, 10 Following */
+.stats-row {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.stat-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--dark-navy);
+}
+
+.stat-label {
+  font-size: 9.5px;
+  color: var(--text-gray);
+}
+
+/* Follow Button (Right side, aligned with header) */
+.follow-action-wrap {
+  padding-top: 12px;
+  flex-shrink: 0;
+}
+
+.btn-follow {
+  width: 78px;
+  height: 32px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: 4.5px;
+  font-family: inherit;
+  font-size: 10.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-follow:hover {
+  background-color: #156ADF;
+}
+
+.btn-follow.following {
+  background-color: #EEF5FF;
+  color: var(--primary-blue);
+  border: 1px solid rgba(25, 118, 243, 0.4);
+}
+
+/* --------------------------------------------------
+   7. PROFILE TABS
+   Posts / About / Followers / Following (Height ~45px)
+   -------------------------------------------------- */
+.profile-tabs-nav {
+  height: 45px;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--white);
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+}
+
+.tabs-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100%;
+}
+
+.tab-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  outline: none;
+  height: 100%;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-gray);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  transition: color 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--primary-blue);
+}
+
+/* Active Tab: Posts (Blue text + 2px Blue underline) */
+.tab-btn.active {
+  color: var(--active-blue);
+  font-weight: 600;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--active-blue);
+}
+
+/* --------------------------------------------------
+   8. TAB PANELS CONTENT
+   -------------------------------------------------- */
+.tab-panels-wrapper {
+  background-color: var(--white);
+  padding: 18px 28px 30px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Placeholders (About, Followers, Following) */
+.placeholder-card-content {
+  padding: 20px 0;
+}
+
+.placeholder-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark-navy);
+  margin-bottom: 8px;
+}
+
+.placeholder-text {
+  font-size: 10.5px;
+  color: var(--text-gray);
+  line-height: 1.5;
+}
+
+.user-list-simple {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.mini-user-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mini-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mini-username {
+  font-size: 11px;
+  color: var(--dark-navy);
+  flex: 1;
+}
+
+.btn-mini-follow {
+  padding: 3px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-light);
+  background: transparent;
+  font-size: 10px;
+  cursor: pointer;
+  color: var(--text-gray);
+}
+
+/* --------------------------------------------------
+   9. MY POSTS & TWO-COLUMN GRID
+   -------------------------------------------------- */
+.section-title-wrap {
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 15.5px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+}
+
+/* Two-Column Grid */
+.posts-two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+.grid-post-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-grid-card);
+  border-radius: 7px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(30, 80, 130, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Image (100px fixed height) */
+.card-image-box {
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  background-color: #E2E8F0;
+  border-radius: 6px 6px 0 0;
+}
+
+.post-img-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Card Content Body */
+.card-content-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-caption-title {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: var(--dark-navy);
+  line-height: 1.4;
+  margin-bottom: 7px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Metadata: (8 Likes 1 Comment / 6 Likes 0 Comments) */
+.post-stats-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 8.8px;
+  color: var(--text-gray);
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  border-bottom: 1px solid #F1F5F9;
+  user-select: none;
+}
+
+.post-stats-meta .like-num,
+.post-stats-meta .comment-num {
+  font-weight: 700;
+  color: var(--dark-navy);
+}
+
+/* Actions: Like / Comment */
+.card-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.post-action-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--text-gray);
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+}
+
+.post-action-btn:hover {
+  color: var(--primary-blue);
+  background-color: #F8FAFD;
+}
+
+.action-svg-icon {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-svg-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Active Liked State */
+.post-action-btn.liked {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.post-action-btn.liked .heart-icon svg {
+  fill: var(--primary-blue);
+  stroke: var(--primary-blue);
+}
+
+/* --------------------------------------------------
+   10. RESPONSIVE DESIGN
+   -------------------------------------------------- */
+
+/* Tablet (Under 780px) */
+@media (max-width: 780px) {
+  .profile-card-container {
+    max-width: 95%;
+  }
+
+  .cover-image-box {
+    height: 105px;
+  }
+
+  .profile-header-section {
+    padding: 0 20px 14px;
+  }
+
+  .profile-tabs-nav {
+    padding: 0 20px;
+    gap: 20px;
+  }
+
+  .tab-panels-wrapper {
+    padding: 16px 20px;
+  }
+}
+
+/* Mobile Devices (Under 620px) */
+@media (max-width: 620px) {
+  .profile-page-wrapper {
+    padding: 12px 8px 30px;
+  }
+
+  .profile-card-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cover-image-box {
+    height: 90px;
+  }
+
+  .avatar-overlap-wrapper {
+    margin-top: -30px;
+    margin-right: 12px;
+  }
+
+  .profile-avatar {
+    width: 65px;
+    height: 65px;
+    border-width: 3px;
+  }
+
+  .profile-header-section {
+    flex-wrap: wrap;
+    padding: 0 16px 14px;
+  }
+
+  .user-details-group {
+    padding-top: 6px;
+  }
+
+  .user-display-name {
+    font-size: 15px;
+  }
+
+  .follow-action-wrap {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .profile-tabs-nav {
+    overflow-x: auto;
+    padding: 0 16px;
+  }
+
+  .tabs-list {
+    gap: 18px;
+  }
+
+  .posts-two-column-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,518 @@
+/* ==========================================================================
+   MINISOCIAL — 4. PROFILE PAGE STYLESHEET
+   Strict reproduction of Screen 4 (Desktop Social-Media Profile)
+   ========================================================================== */
+
+/* --------------------------------------------------
+   1. DESIGN VARIABLES & COLOR PALETTE
+   -------------------------------------------------- */
+:root {
+  --primary-blue: #1976F3;
+  --dark-navy: #14213D;
+  --text-gray: #64748B;
+  --text-muted: #94A3B8;
+  --light-bg: #F7FAFD;
+  --white: #FFFFFF;
+  --border-light: #E2EAF2;
+  --border-card: #E5EDF5;
+  --border-grid-card: #E3EBF3;
+  --active-tab: #1976F3;
+
+  --font-family: 'Inter', Arial, sans-serif;
+}
+
+/* --------------------------------------------------
+   2. RESET & BASE
+   -------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  font-family: var(--font-family);
+  background-color: var(--light-bg);
+  color: var(--dark-navy);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --------------------------------------------------
+   3. MAIN WRAPPER
+   -------------------------------------------------- */
+.profile-page-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  padding: 30px 16px 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* --------------------------------------------------
+   4. MAIN PROFILE CARD CONTAINER
+   Width: 900px–1000px (Desktop target: 940px)
+   -------------------------------------------------- */
+.profile-card-container {
+  width: 940px;
+  max-width: 92%;
+  background-color: var(--white);
+  border: 1px solid var(--border-card);
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(30, 70, 120, 0.06);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* --------------------------------------------------
+   5. COVER IMAGE
+   Height: ~115–130px, Full Width, Top Corners Rounded
+   -------------------------------------------------- */
+.cover-image-box {
+  width: 100%;
+  height: 125px;
+  overflow: hidden;
+  background-color: #312E81;
+}
+
+.cover-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* --------------------------------------------------
+   6. PROFILE INFORMATION AREA
+   Avatar overlaps cover, User info + Follow button
+   -------------------------------------------------- */
+.profile-info-section {
+  display: flex;
+  align-items: flex-start;
+  padding: 0 24px 16px;
+  position: relative;
+  background-color: var(--white);
+}
+
+/* Avatar Overlapping Cover */
+.avatar-overlap-wrapper {
+  margin-top: -42px;
+  margin-right: 18px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  background-color: #6366F1;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.avatar-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* User Details Group: Name, Handle, Stats */
+.user-details-group {
+  flex: 1;
+  padding-top: 10px;
+}
+
+.user-name-row {
+  margin-bottom: 8px;
+}
+
+.user-display-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.user-handle {
+  font-size: 10.5px;
+  color: var(--text-gray);
+  margin-top: 2px;
+  display: block;
+}
+
+/* Statistics: Followers & Following */
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.stat-count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark-navy);
+}
+
+.stat-label {
+  font-size: 10px;
+  color: var(--text-gray);
+}
+
+/* Follow Button */
+.follow-action-wrap {
+  padding-top: 12px;
+  flex-shrink: 0;
+}
+
+.btn-follow {
+  width: 76px;
+  height: 31px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  outline: none;
+  border-radius: 4.5px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-follow:hover {
+  background-color: #156ADF;
+}
+
+.btn-follow.following {
+  background-color: #EEF5FF;
+  color: var(--primary-blue);
+  border: 1px solid rgba(25, 118, 243, 0.4);
+}
+
+/* --------------------------------------------------
+   7. PROFILE TABS
+   Posts / About / Followers / Following (Height ~45px)
+   -------------------------------------------------- */
+.profile-tabs-nav {
+  height: 45px;
+  border-bottom: 1px solid var(--border-light);
+  background-color: var(--white);
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+}
+
+.tabs-list {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  height: 100%;
+}
+
+.tab-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  outline: none;
+  height: 100%;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-gray);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+  transition: color 0.15s ease;
+}
+
+.tab-btn:hover {
+  color: var(--primary-blue);
+}
+
+/* Active Tab: Posts (Blue text + Blue underline) */
+.tab-btn.active {
+  color: var(--active-tab);
+  font-weight: 600;
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--active-tab);
+}
+
+/* --------------------------------------------------
+   8. TAB PANELS CONTENT
+   -------------------------------------------------- */
+.tab-panels-wrapper {
+  background-color: var(--white);
+  padding: 18px 24px 28px;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+/* Placeholder panels (About, Followers, Following) */
+.placeholder-card-content {
+  padding: 24px 0;
+}
+
+.placeholder-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--dark-navy);
+  margin-bottom: 6px;
+}
+
+.placeholder-text {
+  font-size: 10.5px;
+  color: var(--text-gray);
+  line-height: 1.5;
+}
+
+/* --------------------------------------------------
+   9. MY POSTS SECTION & TWO-COLUMN GRID
+   -------------------------------------------------- */
+.section-title-wrap {
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--dark-navy);
+  letter-spacing: -0.01em;
+}
+
+/* Two-Column Grid */
+.posts-two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.grid-post-card {
+  background-color: var(--white);
+  border: 1px solid var(--border-grid-card);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(30, 70, 120, 0.02);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card Image (95px fixed height) */
+.card-image-box {
+  width: 100%;
+  height: 95px;
+  overflow: hidden;
+  background-color: #E2E8F0;
+}
+
+.post-img-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Card Content Body */
+.card-content-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-caption-title {
+  font-size: 9.8px;
+  font-weight: 500;
+  color: var(--dark-navy);
+  line-height: 1.4;
+  margin-bottom: 7px;
+}
+
+/* Metadata (10 Likes 2 Comments) */
+.post-stats-meta {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 8.8px;
+  color: var(--text-gray);
+  padding-bottom: 7px;
+  margin-bottom: 7px;
+  border-bottom: 1px solid #F1F5F9;
+  user-select: none;
+}
+
+/* Action Buttons (Like, Comment) */
+.card-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.post-action-btn {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-family: inherit;
+  font-size: 8.8px;
+  font-weight: 500;
+  color: var(--text-gray);
+  padding: 2px 4px;
+  border-radius: 3px;
+  transition: all 0.15s ease;
+}
+
+.post-action-btn:hover {
+  color: var(--primary-blue);
+  background-color: #F8FAFD;
+}
+
+.action-svg-icon {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-svg-icon svg {
+  width: 12px;
+  height: 12px;
+}
+
+/* Active Liked State */
+.post-action-btn.liked {
+  color: var(--primary-blue);
+  font-weight: 600;
+}
+
+.post-action-btn.liked .heart-icon svg {
+  fill: var(--primary-blue);
+  stroke: var(--primary-blue);
+}
+
+/* --------------------------------------------------
+   10. RESPONSIVE DESIGN
+   -------------------------------------------------- */
+
+/* Tablet (Under 780px) */
+@media (max-width: 780px) {
+  .profile-card-container {
+    max-width: 95%;
+  }
+
+  .cover-image-box {
+    height: 110px;
+  }
+
+  .profile-info-section {
+    padding: 0 16px 14px;
+  }
+
+  .profile-tabs-nav {
+    padding: 0 16px;
+    gap: 20px;
+  }
+
+  .tab-panels-wrapper {
+    padding: 16px;
+  }
+}
+
+/* Mobile Devices (Under 600px) */
+@media (max-width: 600px) {
+  .profile-page-wrapper {
+    padding: 12px 8px 30px;
+  }
+
+  .profile-card-container {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .cover-image-box {
+    height: 90px;
+  }
+
+  .avatar-overlap-wrapper {
+    margin-top: -30px;
+    margin-right: 12px;
+  }
+
+  .profile-avatar {
+    width: 62px;
+    height: 62px;
+    border-width: 3px;
+  }
+
+  .profile-info-section {
+    flex-wrap: wrap;
+    padding: 0 14px 14px;
+  }
+
+  .user-details-group {
+    padding-top: 6px;
+  }
+
+  .user-display-name {
+    font-size: 15px;
+  }
+
+  .follow-action-wrap {
+    width: 100%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .profile-tabs-nav {
+    overflow-x: auto;
+    padding: 0 14px;
+  }
+
+  .tabs-list {
+    gap: 18px;
+  }
+
+  .posts-two-column-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}

@@ -1,0 +1,190 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search: {{ query }} — MiniSocial</title>
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <style>
+    .search-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 24px 20px 60px;
+    }
+    .search-section-box {
+      background: #ffffff;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    }
+    .search-sec-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0F172A;
+      margin: 0 0 14px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .search-result-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid #F1F5F9;
+    }
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="dashboard-layout">
+    
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar" id="dashboard-sidebar">
+      <div class="sidebar-logo">
+        <a href="{% url 'home' %}" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+          <span class="logo-icon-wrap">
+            <svg class="brand-icon-svg" viewBox="0 0 24 24" fill="none"><path d="M16.5 13C17.6 13 18.5 12.1 18.5 11C18.5 9.9 17.6 9 16.5 9C15.4 9 14.5 9.9 14.5 11C14.5 12.1 15.4 13 16.5 13ZM16.5 14.5C15.17 14.5 12.5 15.17 12.5 16.5V17.5H20.5V16.5C20.5 15.17 17.83 14.5 16.5 14.5Z" fill="#1976F3"/></svg>
+          </span>
+          <span class="logo-title">MiniSocial</span>
+        </a>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item"><a href="{% url 'home' %}" class="nav-link"><span class="nav-label">Home</span></a></li>
+          <li class="nav-item"><a href="{% url 'explore' %}" class="nav-link"><span class="nav-label">Explore</span></a></li>
+          <li class="nav-item"><a href="{% url 'circles' %}" class="nav-link"><span class="nav-label">Circles</span></a></li>
+          <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><span class="nav-label">Dashboard</span></a></li>
+          <li class="nav-item"><a href="{% url 'notifications' %}" class="nav-link"><span class="nav-label">Notifications</span></a></li>
+          <li class="nav-item"><a href="{% url 'messages' %}" class="nav-link"><span class="nav-label">Messages</span></a></li>
+          <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link"><span class="nav-label">Profile</span></a></li>
+          <li class="nav-item"><a href="{% url 'settings' %}" class="nav-link"><span class="nav-label">Settings</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <a href="{% url 'logout' %}" class="nav-link logout-link"><span class="nav-label">Logout</span></a>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+      <header class="topbar">
+        <form action="{% url 'search' %}" method="GET" class="search-box-wrap" style="display: flex; width: 100%; max-width: 400px;">
+          <span class="search-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <input type="text" name="q" value="{{ query }}" class="search-input" placeholder="Search..." aria-label="Search">
+        </form>
+      </header>
+
+      <main class="feed-viewport">
+        <div class="search-container">
+          
+          <h1 style="font-size: 20px; font-weight: 700; color: #0F172A; margin: 0 0 20px 0;">
+            Search Results for "<span style="color: #1976F3;">{{ query }}</span>"
+          </h1>
+
+          <!-- Users Section -->
+          {% if users %}
+          <section class="search-section-box">
+            <h2 class="search-sec-title">👥 Users ({{ users|length }})</h2>
+            {% for u in users %}
+            <div class="search-result-item">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; overflow: hidden; background: #E2E8F0;">
+                  {% if u.profile.picture_url %}
+                  <img src="{{ u.profile.picture_url }}" alt="{{ u.username }}" style="width: 100%; height: 100%; object-fit: cover;">
+                  {% else %}
+                  <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: {{ u.profile.avatar_color|default:'#1976F3' }}; color: #fff; font-weight: 700;">{{ u.username|slice:":1"|upper }}</div>
+                  {% endif %}
+                </div>
+                <div>
+                  <a href="{% url 'user_profile' u.username %}" style="font-size: 13.5px; font-weight: 600; color: #0F172A; text-decoration: none;">@{{ u.username }}</a>
+                  {% if u.profile.bio %}
+                  <div style="font-size: 12px; color: #64748B;">{{ u.profile.bio|truncatechars:60 }}</div>
+                  {% endif %}
+                </div>
+              </div>
+              <a href="{% url 'user_profile' u.username %}" class="btn-circle-action" style="text-decoration: none;">View</a>
+            </div>
+            {% endfor %}
+          </section>
+          {% endif %}
+
+          <!-- Circles Section -->
+          {% if circles %}
+          <section class="search-section-box">
+            <h2 class="search-sec-title">⭕ Circles ({{ circles|length }})</h2>
+            {% for c in circles %}
+            <div class="search-result-item">
+              <div>
+                <a href="{% url 'circle_detail' c.id %}" style="font-size: 14px; font-weight: 700; color: #0F172A; text-decoration: none;">{{ c.name }}</a>
+                <div style="font-size: 12px; color: #64748B;">{{ c.description|default:"No description"|truncatechars:70 }} • 👥 {{ c.member_count }} members</div>
+              </div>
+              <a href="{% url 'circle_detail' c.id %}" class="btn-circle-action" style="text-decoration: none;">Open</a>
+            </div>
+            {% endfor %}
+          </section>
+          {% endif %}
+
+          <!-- Topics Section -->
+          {% if topics %}
+          <section class="search-section-box">
+            <h2 class="search-sec-title">🏷️ Topics ({{ topics|length }})</h2>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+              {% for t in topics %}
+              <a href="{% url 'explore' %}?topic={{ t.name }}" style="background: #F1F5F9; border-radius: 16px; padding: 6px 12px; font-size: 13px; color: #1976F3; text-decoration: none; font-weight: 600;">#{{ t.name }}</a>
+              {% endfor %}
+            </div>
+          </section>
+          {% endif %}
+
+          <!-- Posts Section -->
+          {% if posts %}
+          <section class="search-section-box">
+            <h2 class="search-sec-title">📝 Posts ({{ posts|length }})</h2>
+            <div class="posts-stream">
+              {% for post in posts %}
+              <article class="post-card" id="post-{{ post.id }}">
+                <div class="post-header">
+                  <span class="author-name">@{{ post.author.username }}</span>
+                  <span class="post-time">{{ post.created_at|date:"M d, H:i" }}</span>
+                </div>
+                <div class="post-content-body">
+                  <p class="post-text">{{ post.content }}</p>
+                </div>
+                <a href="{% url 'post_detail' post.id %}" style="font-size: 12px; color: #1976F3; text-decoration: none; font-weight: 600;">View Full Post & Comments →</a>
+              </article>
+              {% endfor %}
+            </div>
+          </section>
+          {% endif %}
+
+          {% if not users and not circles and not topics and not posts %}
+          <div style="background: #fff; border: 1px dashed #CBD5E1; border-radius: 12px; padding: 50px 20px; text-align: center; color: #64748B;">
+            <h3 style="color: #1E293B; margin: 0 0 6px 0;">No Results Found</h3>
+            <p style="margin: 0; font-size: 13px;">No matching users, circles, topics, or posts found in SQLite database.</p>
+          </div>
+          {% endif %}
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+</body>
+</html>

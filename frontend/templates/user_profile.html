@@ -1,0 +1,224 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — {{ profile_user.username }}</title>
+  <meta name="description" content="View {{ profile_user.username }}'s profile on MiniSocial.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/user-profile.css' %}">
+</head>
+<body>
+
+  <!-- Centered Page Layout Wrapper -->
+  <main class="page-container">
+    <div class="user-profile-card" id="user-profile-card">
+      
+      <!-- ==================== 1. COVER IMAGE ==================== -->
+      <div class="cover-image-box">
+        <svg class="cover-svg" viewBox="0 0 440 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="user-sky-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1E1B4B"/>
+              <stop offset="40%" stop-color="#312E81"/>
+              <stop offset="70%" stop-color="#4F46E5"/>
+              <stop offset="90%" stop-color="#EC4899"/>
+              <stop offset="100%" stop-color="#FDE047"/>
+            </linearGradient>
+            <linearGradient id="user-mtn-back" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#3730A3" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#1E1B4B" stop-opacity="0.95"/>
+            </linearGradient>
+            <linearGradient id="user-mtn-front" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1E1B4B"/>
+              <stop offset="100%" stop-color="#0F172A"/>
+            </linearGradient>
+          </defs>
+
+          <rect width="440" height="100" fill="url(#user-sky-grad)"/>
+          <circle cx="280" cy="65" r="22" fill="#FFF7ED" opacity="0.9"/>
+          <circle cx="280" cy="65" r="35" fill="#FED7AA" opacity="0.3"/>
+          <path d="M0 100 L0 60 L60 40 L140 70 L210 35 L300 65 L370 30 L440 55 L440 100 Z" fill="url(#user-mtn-back)"/>
+          <path d="M0 100 L0 75 L80 55 L160 85 L250 48 L330 80 L400 45 L440 68 L440 100 Z" fill="url(#user-mtn-front)"/>
+        </svg>
+
+        <a href="{% url 'home' %}" style="position: absolute; top: 10px; left: 12px; background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 10px; font-weight: 600; padding: 4px 10px; border-radius: 4px; backdrop-filter: blur(4px);">
+          ← Feed
+        </a>
+      </div>
+
+      <!-- ==================== 2. PROFILE HEADER / USER INFO ==================== -->
+      <div class="profile-header-section">
+        
+        <!-- Left: Avatar -->
+        <div class="avatar-overlap-wrapper">
+          <div class="profile-avatar" id="avatar-user" style="overflow: hidden; border-radius: 50%;">
+            {% if profile_user.profile.picture_url %}
+            <img src="{{ profile_user.profile.picture_url }}" alt="{{ profile_user.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+            {% else %}
+            <svg class="avatar-svg" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="40" cy="40" r="40" fill="{{ profile_user.profile.avatar_color|default:'#1976F3' }}"/>
+              <circle cx="40" cy="30" r="16.5" fill="#FCD5B5"/>
+              <path d="M24 28C24 14 56 14 56 28C56 30 52 23 40 21C28 23 24 30 24 28Z" fill="#1E293B"/>
+              <circle cx="35" cy="30" r="1.8" fill="#1E293B"/>
+              <circle cx="45" cy="30" r="1.8" fill="#1E293B"/>
+              <path d="M37 36Q40 39.5 43 36" stroke="#E07A5F" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M20 72C20 56 30 50 40 50C50 50 60 56 60 72H20Z" fill="{{ profile_user.profile.avatar_color|default:'#1E40AF' }}"/>
+              <path d="M36 50L40 56L44 50Z" fill="#FCD5B5"/>
+            </svg>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Middle: Username, Handle & Statistics -->
+        <div class="user-details-group">
+          <div class="user-name-row" style="display: flex; align-items: baseline; gap: 6px;">
+            <h1 class="user-display-name">{{ profile_user.username }}</h1>
+            <span class="user-handle">@{{ profile_user.username }}</span>
+            {% if follows_you %}
+            <span style="font-size: 9.5px; background: #EEF2F6; color: #475569; padding: 1px 6px; border-radius: 4px; font-weight: 500;">Follows you</span>
+            {% endif %}
+          </div>
+
+          <!-- Statistics -->
+          <div class="stats-row">
+            <div class="stat-item">
+              <span class="stat-count" id="user-followers-count">{{ followers_count }}</span>
+              <span class="stat-label">Followers</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-count">{{ following_count }}</span>
+              <span class="stat-label">Following</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Follow / Following and Message Buttons -->
+        <div class="follow-action-wrap" style="display: flex; gap: 6px;">
+          <button 
+            type="button" 
+            class="btn-follow {% if is_following %}following{% endif %}" 
+            id="btn-follow-user" 
+            data-username="{{ profile_user.username }}"
+            data-following="{% if is_following %}true{% else %}false{% endif %}"
+          >
+            {% if is_following %}Following{% else %}Follow{% endif %}
+          </button>
+          <a 
+            href="{% url 'messages_user' profile_user.username %}" 
+            class="btn-follow" 
+            style="text-decoration: none; line-height: 24px; text-align: center; background-color: #EEF5FF; color: #1976F3; border: 1px solid #BFDBFE;"
+          >
+            Message
+          </a>
+        </div>
+
+      </div>
+
+      <!-- ==================== 3. PROFILE TABS ==================== -->
+      <nav class="profile-tabs-nav" aria-label="Profile navigation">
+        <ul class="tabs-list">
+          <li class="tab-item">
+            <button type="button" class="tab-btn active" data-tab="posts">Posts</button>
+          </li>
+          <li class="tab-item">
+            <button type="button" class="tab-btn" data-tab="about">About</button>
+          </li>
+        </ul>
+      </nav>
+
+      <!-- ==================== 4. PROFILE POSTS STREAM ==================== -->
+      <div class="profile-content-area">
+        
+        <div class="profile-posts-stream" id="posts-tab-content">
+          {% for post in posts %}
+          <article class="post-card" id="post-{{ post.id }}">
+            <div class="post-header">
+              <div class="post-author-box">
+                <div class="post-avatar" style="overflow: hidden; border-radius: 50%;">
+                  {% if profile_user.profile.picture_url %}
+                  <img src="{{ profile_user.profile.picture_url }}" alt="{{ profile_user.username }}" class="avatar-img" style="width: 100%; height: 100%; object-fit: cover;">
+                  {% else %}
+                  <svg class="avatar-svg" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="16" cy="16" r="16" fill="{{ profile_user.profile.avatar_color|default:'#1976F3' }}"/>
+                    <circle cx="16" cy="12" r="6" fill="#FCD5B5"/>
+                    <path d="M11 10C11 6 21 6 21 10C21 11 19 8 16 8C13 8 11 11 11 10Z" fill="#1E293B"/>
+                    <path d="M8 26C8 21 12 19 16 19C20 19 24 21 24 26H8Z" fill="{{ profile_user.profile.avatar_color|default:'#1976F3' }}"/>
+                  </svg>
+                  {% endif %}
+                </div>
+                <div class="author-meta">
+                  <span class="author-username">{{ profile_user.username }}</span>
+                  <span class="post-time">{{ post.created_at|timesince }} ago</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="post-body">
+              <a href="{% url 'post_detail' post.id %}" style="text-decoration: none; color: inherit;">
+                <p class="post-text">{{ post.content }}</p>
+              </a>
+              {% if post.image %}
+              <div class="post-media-wrap" style="margin-top: 8px; border-radius: 6px; overflow: hidden; max-height: 200px;">
+                <img src="{{ post.image.url }}" alt="Post image" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+              </div>
+              {% endif %}
+            </div>
+
+            <div class="post-metadata">
+              <span class="stat-likes-count"><span class="like-number">{{ post.like_count }}</span> Likes</span>
+              <span class="stat-comments-count"><span class="comment-number">{{ post.comment_count }}</span> Comments</span>
+            </div>
+
+            <div class="post-actions-bar">
+              <button 
+                type="button" 
+                class="action-btn action-like-btn {% if post.is_liked %}active{% endif %}"
+                data-post-id="{{ post.id }}"
+                data-liked="{% if post.is_liked %}true{% else %}false{% endif %}"
+              >
+                <span class="action-icon heart-icon">
+                  <svg viewBox="0 0 24 24" fill="{% if post.is_liked %}#FF4D67{% else %}none{% endif %}" stroke="{% if post.is_liked %}#FF4D67{% else %}currentColor{% endif %}" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                  </svg>
+                </span>
+                <span class="action-text">{% if post.is_liked %}Liked{% else %}Like{% endif %}</span>
+              </button>
+
+              <a href="{% url 'post_detail' post.id %}" class="action-btn" style="text-decoration: none; color: inherit;">
+                <span class="action-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                  </svg>
+                </span>
+                <span class="action-text">Comment</span>
+              </a>
+            </div>
+          </article>
+          {% empty %}
+          <div style="text-align: center; padding: 30px 10px; color: #64748B; font-size: 12px;">
+            No posts from {{ profile_user.username }} yet.
+          </div>
+          {% endfor %}
+        </div>
+
+        <!-- About Tab Content -->
+        <div class="profile-about-content" id="about-tab-content" style="display: none; padding: 16px;">
+          <h3 style="font-size: 13px; font-weight: 600; margin-bottom: 6px;">Bio</h3>
+          <p style="font-size: 12px; color: #475569; line-height: 1.4;">{{ profile_user.profile.bio|default:"No bio provided yet." }}</p>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <script src="{% static 'js/user-profile.js' %}"></script>
+</body>
+</html>

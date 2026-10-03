@@ -1,0 +1,261 @@
+/* ==========================================================================
+   MiniSocial — Screen 9: Create Post (Modal/Inline) CSS
+   Exact visual reproduction of Screen 9 reference.
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Full-Screen Darkened Overlay
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.70);
+  z-index: 999;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-overlay.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Create Post Centered Modal
+   -------------------------------------------------------------------------- */
+.create-post-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  width: 260px;
+  max-width: calc(100% - 30px);
+  background-color: #FFFFFF;
+  border: 1px solid #E1E8F0;
+  border-radius: 6px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.18);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, Arial, sans-serif;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  visibility: visible;
+  opacity: 1;
+}
+
+.create-post-modal.hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translate(-50%, -46%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   Modal Header & Close Icon
+   -------------------------------------------------------------------------- */
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 13px 8px 13px;
+}
+
+.modal-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #14213D;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.btn-close-modal {
+  background: none;
+  border: none;
+  font-size: 16px;
+  color: #64748B;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 2px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.15s ease;
+}
+
+.btn-close-modal:hover {
+  color: #14213D;
+}
+
+/* Header Divider */
+.modal-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #E6ECF2;
+  border: none;
+  margin: 0;
+}
+
+/* --------------------------------------------------------------------------
+   Modal Body / Form Area
+   -------------------------------------------------------------------------- */
+.modal-body {
+  padding: 11px 13px 12px 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.textarea-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.post-textarea {
+  width: 100%;
+  height: 70px;
+  background-color: #FFFFFF;
+  border: 1px solid #DCE5EE;
+  border-radius: 4px;
+  resize: none;
+  padding: 8px 10px;
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 400;
+  color: #14213D;
+  line-height: 1.4;
+  outline: none;
+  transition: border-color 0.15s ease;
+}
+
+.post-textarea::placeholder {
+  color: #94A3B8;
+  font-size: 9.5px;
+  font-weight: 400;
+}
+
+.post-textarea:focus {
+  border-color: #1976F3;
+}
+
+/* Image preview thumbnail inside modal (if user selects an image) */
+.image-preview-container {
+  position: relative;
+  margin-top: 6px;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #DCE5EE;
+  max-height: 60px;
+  background: #F8FAFC;
+}
+
+.image-preview-container img {
+  width: 100%;
+  height: 60px;
+  object-fit: cover;
+  display: block;
+}
+
+.btn-remove-image {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(15, 23, 42, 0.7);
+  color: #FFFFFF;
+  border: none;
+  font-size: 11px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+/* Subtle Validation Message */
+.validation-message {
+  font-size: 8.5px;
+  color: #EF4444;
+  margin: -2px 0 0 0;
+  line-height: 1.2;
+}
+
+/* --------------------------------------------------------------------------
+   Bottom Action Bar: Add image & Post
+   -------------------------------------------------------------------------- */
+.modal-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2px;
+}
+
+/* Left: Add image button */
+.btn-add-image {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 23px;
+  padding: 0 8px;
+  background-color: #FFFFFF;
+  border: 1px solid #D7E1EB;
+  border-radius: 3.5px;
+  color: #475569;
+  font-family: inherit;
+  font-size: 8.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-add-image:hover {
+  background-color: #F8FAFC;
+  border-color: #CBD5E1;
+  color: #1E293B;
+}
+
+.btn-add-image .btn-icon-svg {
+  width: 10.5px;
+  height: 10.5px;
+  color: #64748B;
+  flex-shrink: 0;
+}
+
+/* Right: Post button */
+.btn-submit-post {
+  width: 52px;
+  height: 23px;
+  background-color: #1976F3;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 3.5px;
+  font-family: inherit;
+  font-size: 8.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.15s ease;
+}
+
+.btn-submit-post:hover {
+  background-color: #1565C0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Styling
+   -------------------------------------------------------------------------- */
+@media (max-width: 480px) {
+  .create-post-modal {
+    width: calc(100% - 30px);
+  }
+}

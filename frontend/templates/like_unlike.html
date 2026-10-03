@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MiniSocial — Like / Unlike UI State</title>
+  <meta name="description" content="MiniSocial demonstration of post card Like and Unlike UI states side by side.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static 'css/like-unlike.css' %}">
+</head>
+<body>
+
+  <!-- Main Centered Comparison Wrapper -->
+  <main class="page-container">
+    <div style="position: fixed; top: 12px; left: 16px;">
+      <a href="{% url 'home' %}" style="background: rgba(15,23,42,0.6); color: white; text-decoration: none; font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 4px; backdrop-filter: blur(4px);">
+        ← Feed
+      </a>
+    </div>
+
+    <div class="cards-comparison-grid">
+
+      <!-- ==================== LEFT CARD: LIKED STATE ==================== -->
+      <article class="post-card" id="card-liked-state">
+        
+        <header class="post-header">
+          <div class="author-avatar" aria-hidden="true">
+            <svg viewBox="0 0 26 26" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="13" cy="13" r="13" fill="#1976F3"/>
+              <circle cx="13" cy="10" r="5" fill="#FCD5B5"/>
+              <path d="M9 8C9 5 17 5 17 8C17 9 15 7 13 7C11 7 9 9 9 8Z" fill="#1E293B"/>
+              <path d="M6.5 21C6.5 17 10 15 13 15C16 15 19.5 17 19.5 21H6.5Z" fill="#1976F3"/>
+            </svg>
+          </div>
+          <div class="author-info">
+            <h2 class="author-name">sai_kumar</h2>
+            <span class="post-time">2 hours ago</span>
+          </div>
+        </header>
+
+        <div class="post-content">
+          <p class="post-text">Hello everyone! Welcome to my app.</p>
+        </div>
+
+        <div class="post-stats">
+          <span class="stat-likes"><span class="likes-count">12</span> Likes</span>
+          <span class="stat-comments">4 Comments</span>
+        </div>
+
+        <footer class="post-actions">
+          <button 
+            type="button" 
+            class="action-btn action-like liked" 
+            id="btn-like-left" 
+            aria-label="Unlike post" 
+            data-liked="true"
+          >
+            <span class="icon-wrap heart-icon-wrap" aria-hidden="true">
+              <svg class="heart-icon filled" viewBox="0 0 24 24" width="11" height="11" fill="#FF4D67">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <svg class="heart-icon outline" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </span>
+            <span class="btn-text">Liked</span>
+          </button>
+
+          <button type="button" class="action-btn action-comment" aria-label="Comment on post">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+            <span class="btn-text">Comment</span>
+          </button>
+
+          <button type="button" class="action-btn action-share" aria-label="Share post">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </span>
+            <span class="btn-text">Share</span>
+          </button>
+        </footer>
+
+      </article>
+
+      <!-- ==================== RIGHT CARD: UNLIKED STATE ==================== -->
+      <article class="post-card" id="card-unliked-state">
+        
+        <header class="post-header">
+          <div class="author-avatar" aria-hidden="true">
+            <svg viewBox="0 0 26 26" width="26" height="26" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="13" cy="13" r="13" fill="#1976F3"/>
+              <circle cx="13" cy="10" r="5" fill="#FCD5B5"/>
+              <path d="M9 8C9 5 17 5 17 8C17 9 15 7 13 7C11 7 9 9 9 8Z" fill="#1E293B"/>
+              <path d="M6.5 21C6.5 17 10 15 13 15C16 15 19.5 17 19.5 21H6.5Z" fill="#1976F3"/>
+            </svg>
+          </div>
+          <div class="author-info">
+            <h2 class="author-name">sai_kumar</h2>
+            <span class="post-time">2 hours ago</span>
+          </div>
+        </header>
+
+        <div class="post-content">
+          <p class="post-text">Hello everyone! Welcome to my app.</p>
+        </div>
+
+        <div class="post-stats">
+          <span class="stat-likes"><span class="likes-count">12</span> Likes</span>
+          <span class="stat-comments">4 Comments</span>
+        </div>
+
+        <footer class="post-actions">
+          <button 
+            type="button" 
+            class="action-btn action-like" 
+            id="btn-like-right" 
+            aria-label="Like post" 
+            data-liked="false"
+          >
+            <span class="icon-wrap heart-icon-wrap" aria-hidden="true">
+              <svg class="heart-icon filled" viewBox="0 0 24 24" width="11" height="11" fill="#FF4D67">
+                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+              </svg>
+              <svg class="heart-icon outline" viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+              </svg>
+            </span>
+            <span class="btn-text">Like</span>
+          </button>
+
+          <button type="button" class="action-btn action-comment" aria-label="Comment on post">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+              </svg>
+            </span>
+            <span class="btn-text">Comment</span>
+          </button>
+
+          <button type="button" class="action-btn action-share" aria-label="Share post">
+            <span class="icon-wrap" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/>
+                <circle cx="6" cy="12" r="3"/>
+                <circle cx="18" cy="19" r="3"/>
+                <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </span>
+            <span class="btn-text">Share</span>
+          </button>
+        </footer>
+
+      </article>
+
+    </div>
+  </main>
+
+  <script src="{% static 'js/like-unlike.js' %}"></script>
+</body>
+</html>
